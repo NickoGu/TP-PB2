@@ -5,6 +5,14 @@ public class Nota {
 	private Integer primerParcial;
 	private Integer segundoParcial;
 
+	
+	
+	public void asignarValor(Integer valor) {
+		
+		
+	}
+	
+	
 	public Integer getPrimerParcial() {
 		return primerParcial;
 	}
@@ -20,5 +28,7 @@ public class Nota {
 	public void setSegundoParcial(Integer segundoParcial) {
 		this.segundoParcial = segundoParcial;
 	}
+
+
 
 }
