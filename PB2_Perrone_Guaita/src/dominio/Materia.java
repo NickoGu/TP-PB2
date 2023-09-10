@@ -6,7 +6,7 @@ public class Materia {
 	private String nombre;
 	private Integer codigoMateria;
 	private ArrayList<Correlativa> correlativas;
-	private Integer notaFinal;
+	private Boolean isPromocionada = false;
 
 	public String getNombre() {
 		return nombre;
@@ -30,14 +30,6 @@ public class Materia {
 
 	public void setCorrelativas(ArrayList<Correlativa> correlativas) {
 		this.correlativas = correlativas;
-	}
-
-	public Integer getNotaFinal() {
-		return notaFinal;
-	}
-
-	public void setNotaFinal(Integer notaFinal) {
-		this.notaFinal = notaFinal;
 	}
 
 }

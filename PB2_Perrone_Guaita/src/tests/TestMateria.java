@@ -6,6 +6,9 @@ import org.junit.Test;
 
 public class TestMateria {
 
+	//Chequea las notas y verifica que este promocionada
+	
+	
 	@Test
 	public void test() {
 		fail("Not yet implemented");
