@@ -8,6 +8,12 @@ public class Materia {
 	private ArrayList<Correlativa> correlativas;
 	private Boolean isPromocionada = false;
 
+	public Materia(String nombre, Integer codigoMateria) {
+		super();
+		this.nombre = nombre;
+		this.codigoMateria = codigoMateria;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -32,4 +38,31 @@ public class Materia {
 		this.correlativas = correlativas;
 	}
 
+	public Boolean estaPromocionada(Integer primerParcial, Integer segundoParcial ) {
+		Boolean promociono = false;
+		
+		if (primerParcial >= 7 && segundoParcial >= 7) {
+			promociono = true;
+		}
+		
+		
+		return promociono;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

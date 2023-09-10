@@ -5,6 +5,18 @@ public class Nota {
 	private Integer primerParcial;
 	private Integer segundoParcial;
 
+	
+	
+	public Nota() {
+		
+	}
+	
+	
+	public Nota(Integer primerParcial, Integer segundoParcial) {
+		this.primerParcial = primerParcial;
+		this.segundoParcial = segundoParcial;
+	}
+
 	public void asignarValorAprimerParcial(Integer valorNota) {
 		if (valorNota >= 1 && valorNota <= 10)
 			this.primerParcial = valorNota;
