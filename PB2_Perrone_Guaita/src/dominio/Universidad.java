@@ -7,10 +7,11 @@ public class Universidad {
 	private ArrayList<Materia> materias;
 	private ArrayList<Profesor> profesores;
 
-<<<<<<< HEAD
-=======
+
 	public Universidad() {
 		 materias = new ArrayList<Materia>();
+		 alumnos = new ArrayList<Alumno>();
+		 profesores = new ArrayList<Profesor>();
 	}
 
 	public void registrarMateria(Materia materia) {
@@ -34,7 +35,12 @@ public class Universidad {
 
 		return inscribioCorrelativa;
 	}
->>>>>>> branch 'master' of https://github.com/NickoGu/TP-PB2.git
+
+	public void inscribirAlumno(Alumno alumno) {
+		alumnos.add(alumno);
+		
+	}
+
 
 
 }

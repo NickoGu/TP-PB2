@@ -30,8 +30,10 @@ public class TestMateria {
 
 		Nota nota = new Nota(8, 8);
 		Materia materia = new Materia("Programacion", 1243);
+		materia.setNota(nota);
 
-		Boolean estaPromocionada = materia.estaPromocionada(nota.getPrimerParcial(), nota.getSegundoParcial());
+		Boolean estaPromocionada = materia.estaPromocionada(materia.getNota().getPrimerParcial(),
+				materia.getNota().getSegundoParcial());
 
 		assertTrue(estaPromocionada);
 
@@ -63,9 +65,10 @@ public class TestMateria {
 
 		universidad.registrarMateria(materia);
 		universidad.asignarCorrelativas(materia, materia2);
+		materia.setNota(nota);
 
-		Boolean primeraMateriaPromocionada = materia.inscribirAlumno(alumno, nota.getPrimerParcial(),
-				nota.getSegundoParcial());
+		Boolean primeraMateriaPromocionada = materia.inscribirAlumno(alumno, materia.getNota().getPrimerParcial(),
+				materia.getNota().getSegundoParcial());
 
 		assertTrue(primeraMateriaPromocionada);
 

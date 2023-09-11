@@ -8,6 +8,7 @@ public class Materia {
 	private ArrayList<Materia> correlativas;
 	private Boolean isPromocionada = false;
 	private ArrayList<Alumno> alumnos;
+	private Nota nota;
 
 	public Materia(String nombre, Integer codigoMateria) {
 		this.nombre = nombre;
@@ -64,6 +65,14 @@ public class Materia {
 		
 		
 		return sePudoInscribir;
+	}
+
+	public Nota getNota() {
+		return nota;
+	}
+
+	public void setNota(Nota nota) {
+		this.nota = nota;
 	}
 
 	
