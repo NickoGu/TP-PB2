@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Materia {
 	private String nombre;
 	private Integer codigoMateria;
-	private ArrayList<Correlativa> correlativas;
+	private ArrayList<Materia> correlativas;
 	private Boolean isPromocionada = false;
+	private ArrayList<Alumno> alumnos;
 
 	public Materia(String nombre, Integer codigoMateria) {
-		super();
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
+		correlativas = new ArrayList<Materia>();
+		alumnos = new ArrayList<Alumno>();
 	}
 
 	public String getNombre() {
@@ -30,32 +32,40 @@ public class Materia {
 		this.codigoMateria = codigoMateria;
 	}
 
-	public ArrayList<Correlativa> getCorrelativas() {
+	public ArrayList<Materia> getCorrelativas() {
 		return correlativas;
 	}
 
-	public void setCorrelativas(ArrayList<Correlativa> correlativas) {
+	public void setCorrelativas(ArrayList<Materia> correlativas) {
 		this.correlativas = correlativas;
 	}
 
-	public Boolean estaPromocionada(Integer primerParcial, Integer segundoParcial ) {
+	public void agregarCorrelativa(Materia materia) {
+		correlativas.add(materia);
+	}
+
+	public Boolean estaPromocionada(Integer primerParcial, Integer segundoParcial) {
 		Boolean promociono = false;
-		
+
 		if (primerParcial >= 7 && segundoParcial >= 7) {
 			promociono = true;
 		}
-		
-		
+
 		return promociono;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+	public Boolean inscribirAlumno(Alumno alumno, Integer primerParcial, Integer segundoParcial) {
+		Boolean sePudoInscribir = false;
+		
+		if(estaPromocionada(primerParcial, segundoParcial)){
+			alumnos.add(alumno);
+			sePudoInscribir = true;
+		}
+		
+		
+		return sePudoInscribir;
+	}
+
 	
 	
 	
