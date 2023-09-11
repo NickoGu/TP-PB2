@@ -7,14 +7,14 @@ public class Materia {
 	private Integer codigoMateria;
 	private ArrayList<Materia> correlativas;
 	private Boolean isPromocionada = false;
-	private ArrayList<Alumno> alumnos;
+	private ArrayList<Alumno> alumnosInscriptosAlaMateria;
 	private Nota nota;
 
 	public Materia(String nombre, Integer codigoMateria) {
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
 		correlativas = new ArrayList<Materia>();
-		alumnos = new ArrayList<Alumno>();
+		alumnosInscriptosAlaMateria = new ArrayList<Alumno>();
 	}
 
 	public String getNombre() {
@@ -45,26 +45,12 @@ public class Materia {
 		correlativas.add(materia);
 	}
 
-	public Boolean estaPromocionada(Integer primerParcial, Integer segundoParcial) {
-		Boolean promociono = false;
+	public void estaPromocionada(Integer primerParcial, Integer segundoParcial) {
 
 		if (primerParcial >= 7 && segundoParcial >= 7) {
-			promociono = true;
+			isPromocionada = true;
 		}
 
-		return promociono;
-	}
-
-	public Boolean inscribirAlumno(Alumno alumno, Integer primerParcial, Integer segundoParcial) {
-		Boolean sePudoInscribir = false;
-		
-		if(estaPromocionada(primerParcial, segundoParcial)){
-			alumnos.add(alumno);
-			sePudoInscribir = true;
-		}
-		
-		
-		return sePudoInscribir;
 	}
 
 	public Nota getNota() {
@@ -75,13 +61,22 @@ public class Materia {
 		this.nota = nota;
 	}
 
+	public Boolean getIsPromocionada() {
+		return isPromocionada;
+	}
+
+	public void setIsPromocionada(Boolean isPromocionada) {
+		this.isPromocionada = isPromocionada;
+	}
+
+	public ArrayList<Alumno> getAlumnos() {
+		return alumnosInscriptosAlaMateria;
+	}
+
+	public void setAlumnos(ArrayList<Alumno> alumnos) {
+		this.alumnosInscriptosAlaMateria = alumnos;
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 }

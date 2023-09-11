@@ -18,7 +18,7 @@ public class TestUniversidad {
 
 			Alumno alumno = new Alumno(nombre, apellido, dni);
 			Universidad universidad = new Universidad();
-			universidad.inscribirAlumno(alumno);
+			universidad.inscribirAlumnoAuiversidad(alumno);
 			
 			
 			
