@@ -26,8 +26,6 @@ public class Profesor {
 		this.dni = dni;
 	}
 	
-	//METODOS:
-	
 	
 
 }

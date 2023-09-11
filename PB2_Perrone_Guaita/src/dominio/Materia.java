@@ -9,7 +9,6 @@ public class Materia {
 	private Boolean isPromocionada = false;
 
 	public Materia(String nombre, Integer codigoMateria) {
-		super();
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
 	}
