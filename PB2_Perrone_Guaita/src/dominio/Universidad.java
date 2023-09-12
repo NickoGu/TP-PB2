@@ -7,6 +7,7 @@ public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
+	private ArrayList<Curso> cursos;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
@@ -129,6 +130,11 @@ public class Universidad {
 
 	public void setProfesores(ArrayList<Profesor> profesores) {
 		this.profesores = profesores;
+	}
+
+	public void inscribirProfesor(Profesor profesor) {
+		profesores.add(profesor);
+		
 	}
 	
 
