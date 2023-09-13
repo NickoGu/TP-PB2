@@ -7,11 +7,13 @@ public class Alumno {
 	private String apellido;
 	private Integer dni;
 	private ArrayList<Nota> notas;
+	private ArrayList<Materia> materias;
 
 	public Alumno(String nombre, String apellido, Integer dni) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
+		materias = new ArrayList<Materia> ();
 	}
 
 	public String getNombre() {
@@ -45,5 +47,17 @@ public class Alumno {
 	public void setNotas(ArrayList<Nota> notas) {
 		this.notas = notas;
 	}
+
+	public ArrayList<Materia> getMaterias() {
+		return materias;
+	}
+
+	public void setMaterias(ArrayList<Materia> materias) {
+		this.materias = materias;
+	}
+	
+	
+	
+	
 
 }

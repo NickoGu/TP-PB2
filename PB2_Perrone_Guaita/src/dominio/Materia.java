@@ -9,13 +9,17 @@ public class Materia {
 	private Boolean isPromocionada = false;
 	private ArrayList<Alumno> alumnosInscriptosAlaMateria;
 	private Nota nota;
+	private Dias dias;
+	private Horario horarios;
 
-	public Materia(String nombre, Integer codigoMateria) {
+	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
 		correlativas = new ArrayList<Materia>();
 		alumnosInscriptosAlaMateria = new ArrayList<Alumno>();
-	}
+		this.dias = dias;
+		this.horarios = horarios;
+		}
 
 	public String getNombre() {
 		return nombre;
@@ -75,6 +79,22 @@ public class Materia {
 
 	public void setAlumnos(ArrayList<Alumno> alumnos) {
 		this.alumnosInscriptosAlaMateria = alumnos;
+	}
+
+	public Dias getDias() {
+		return dias;
+	}
+
+	public void setDias(Dias dias) {
+		this.dias = dias;
+	}
+
+	public Horario getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Horario horarios) {
+		this.horarios = horarios;
 	}
 	
 	
