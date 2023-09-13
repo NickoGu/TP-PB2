@@ -7,6 +7,8 @@ public class Curso {
 	ArrayList<Alumno> alumnos;
 	Aula aula;
 	Profesor profesor;
-	Integer codigo;
+	Integer codigoComision;
 	CicloLectivo cicloLectivo;
 } 
+
+

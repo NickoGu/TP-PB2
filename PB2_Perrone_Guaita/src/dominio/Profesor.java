@@ -4,6 +4,9 @@ public class Profesor {
 
 	private String nombre;
 	private Integer dni;
+	private Horario horario;
+	private CicloLectivo cuatri;
+	private Dias dias;
 
 	public Profesor(String nombre, Integer dni) {
 		this.nombre = nombre;

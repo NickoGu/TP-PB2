@@ -60,7 +60,7 @@ public class Universidad {
 		// El for recorre las correlativas de la materia brindada por parametro
 		for (int i = 0; i < materia.getCorrelativas().size(); i++) {
 			if (this.buscarMateria(materia.getCorrelativas().get(i).getCodigoMateria()) != null) {
-				cantidadDeCorrelativasNecesarias++;
+				cantidadDeCorrelativasNecesarias++;  // pb1 nul null null null
 				// si encuentra una correlativa, luego tiene que verificar que este promocionada
 
 				// Si la correlativa que se encuentra en esa posicion del array que pertence a
@@ -80,8 +80,7 @@ public class Universidad {
 
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, Integer primerParcial,
-			Integer segundoParcial) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)) {

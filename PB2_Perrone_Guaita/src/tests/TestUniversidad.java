@@ -61,7 +61,7 @@ public class TestUniversidad {
 			Alumno alumno = new Alumno(nombre, apellido, dni);
 
 			Universidad universidad = new Universidad();
-			universidad.inscribirAlumnoAMateria(alumno, materia, materia.getNota().getPrimerParcial(), materia.getNota().getSegundoParcial());
+			universidad.inscribirAlumnoAMateria(alumno, materia);
 			
 			Boolean seInscribió = materia.getAlumnos().contains(alumno);
 			
