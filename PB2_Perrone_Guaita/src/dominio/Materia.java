@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Materia {
 	private String nombre;
 	private Integer codigoMateria;
-	private ArrayList<Materia> correlativas;
+	private ArrayList <Materia> correlativas;
 	private Boolean isPromocionada = false;
 	private ArrayList<Alumno> alumnosInscriptosAlaMateria;
 	private Nota nota;
