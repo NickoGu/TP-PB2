@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dominio.Alumno;
+
 import dominio.Dias;
 import dominio.Horario;
 import dominio.Materia;
@@ -20,10 +20,9 @@ public class TestMateria {
 
 		String nombreMateria = "Programacion 2";
 		Integer codigoMateria = 123456;
-		Dias dias = null;
-		Horario horarios = null;
 
-		Materia materia = new Materia(nombreMateria, codigoMateria, dias.LUNES, horarios.TURNO_MANANA);
+
+		Materia materia = new Materia(nombreMateria, codigoMateria, Dias.LUNES, Horario.TURNO_MANANA);
 		assertEquals(materia.getNombre(), nombreMateria);
 		assertEquals(materia.getCodigoMateria(), codigoMateria);
 	}
@@ -32,10 +31,9 @@ public class TestMateria {
 	public void verificarQueLaMateriaEstáAprobada() {
 
 		Nota nota = new Nota(8, 8);
-		Dias dias = null;
-		Horario horarios = null;
 
-		Materia materia = new Materia("Programacion", 14302, dias.LUNES, horarios.TURNO_MANANA);
+
+		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
 
 		materia.estaPromocionada(materia.getNota().getPrimerParcial(), materia.getNota().getSegundoParcial());
@@ -48,13 +46,12 @@ public class TestMateria {
 	public void verificarSiUnaMateriaTieneCorrelativas() {
 
 		Universidad universidad = new Universidad();
-		Dias dias = null;
-		Horario horarios = null;
+	
 		
 		
 		
-		Materia materia = new Materia("Programacion 2", 14302, dias.LUNES, horarios.TURNO_MANANA);
-		Materia materia2 = new Materia("Programacion", 14302, dias.SABADOS, horarios.TURNO_MANANA);
+		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
 
 		universidad.registrarMateria(materia);
 		universidad.registrarMateria(materia2);
@@ -65,6 +62,15 @@ public class TestMateria {
 		assertNotNull(correlativaAsignada);
 
 	}
+	
+	@Test
+	public void verificarSiTeDejaInscribirAlumnoLuegoDeQueElCupoDelCursoSeHayaLlenado() {
+
+		
+
+	}
+	
+	
 
 //	@Test
 //	public void verificarSiAdeudaCorrelativa() {

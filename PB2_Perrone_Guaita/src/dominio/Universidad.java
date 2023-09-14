@@ -150,4 +150,19 @@ public class Universidad {
 
 	}
 
+	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, CicloLectivo cicloLectivo) {
+		Boolean pudoAsignar = false;
+		//Para asignar el curso debo chequear que el aula tenga la capacidad suficiente, 
+		
+		
+		
+		return pudoAsignar;
+	}
+
+	
+	
+	
+	
+	
+	
 }

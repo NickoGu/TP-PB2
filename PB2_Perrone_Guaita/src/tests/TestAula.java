@@ -20,9 +20,7 @@ public class TestAula {
 		Integer numDeAulaObtenido = aula3.getNumAula();
 		
 		assertEquals(numDeAulaEsperado, numDeAulaObtenido);
-		
-		
-		
+			
 	}
 
 }
