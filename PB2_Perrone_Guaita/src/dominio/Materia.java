@@ -9,12 +9,14 @@ public class Materia {
 	private Boolean isPromocionada = false;
 	private ArrayList<Alumno> alumnosInscriptosAlaMateria;
 	private Nota nota;
+	private static Integer CONTADOR_MATERIAS = 1;
 
 	public Materia(String nombre, Integer codigoMateria) {
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
 		correlativas = new ArrayList<Materia>();
 		alumnosInscriptosAlaMateria = new ArrayList<Alumno>();
+		this.codigoMateria = CONTADOR_MATERIAS++;
 	}
 
 	public String getNombre() {
