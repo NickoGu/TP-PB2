@@ -1,7 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
-
+import java.util.Iterator;
 
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
@@ -27,7 +27,6 @@ public class Universidad {
 		materiasRegistradas.add(materia);
 
 	}
-
 
 	public Alumno buscarAlumno(Integer dniAlumno) {
 		Alumno alumnoEncontrado = null;
@@ -60,7 +59,7 @@ public class Universidad {
 		// El for recorre las correlativas de la materia brindada por parametro
 		for (int i = 0; i < materia.getCorrelativas().size(); i++) {
 			if (this.buscarMateria(materia.getCorrelativas().get(i).getCodigoMateria()) != null) {
-				cantidadDeCorrelativasNecesarias++;  // pb1 nul null null null
+				cantidadDeCorrelativasNecesarias++; // pb1 nul null null null
 				// si encuentra una correlativa, luego tiene que verificar que este promocionada
 
 				// Si la correlativa que se encuentra en esa posicion del array que pertence a
@@ -80,10 +79,25 @@ public class Universidad {
 
 	}
 
+	public Boolean verificarHorariosYDias(Alumno alumno, Materia materia) {
+		Boolean estáLibre = true;
+
+		for (int i = 0; i < alumno.getMaterias().size(); i++) {
+			if (alumno.getMaterias().get(i).getDias().equals(materia.getDias())
+					&& alumno.getMaterias().get(i).getHorarios().equals(materia.getHorarios())) {
+				estáLibre = false;
+				break;
+			}
+		}
+
+		return estáLibre;
+	}
+
 	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)) {
+			alumno.getMaterias().add(materiaAinscribirse);
 			materiaAinscribirse.getAlumnos().add(alumno);
 			sePudoInscribir = true;
 		}
@@ -97,7 +111,7 @@ public class Universidad {
 		return sePudoInscribir;
 	}
 
-	public void agregarUnaCoorrelativaAunaMateria(Materia materia, Materia materiaAagregarComoCorrelativa) {
+	public void agregarUnaCorrelativaAunaMateria(Materia materia, Materia materiaAagregarComoCorrelativa) {
 		Materia materiaExiste = this.buscarMateria(materia.getCodigoMateria());
 		Materia materiaAagregarExiste = this.buscarMateria(materiaAagregarComoCorrelativa.getCodigoMateria());
 
@@ -133,8 +147,7 @@ public class Universidad {
 
 	public void inscribirProfesor(Profesor profesor) {
 		profesores.add(profesor);
-		
+
 	}
-	
 
 }
