@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Curso {
 
-	private ArrayList<Materia> materias;
+
 	private ArrayList<Alumno> alumnos;
 	private Aula aula;
 	private Profesor profesor;
@@ -16,13 +16,6 @@ public class Curso {
 		this.codigoComision = CONTADOR_MATERIAS++;
 	}
 
-	public ArrayList<Materia> getMaterias() {
-		return materias;
-	}
-
-	public void setMaterias(ArrayList<Materia> materias) {
-		this.materias = materias;
-	}
 
 	public ArrayList<Alumno> getAlumnos() {
 		return alumnos;

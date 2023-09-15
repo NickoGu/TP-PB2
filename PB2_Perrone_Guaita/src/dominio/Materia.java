@@ -9,6 +9,7 @@ public class Materia {
 	private Boolean isPromocionada = false;
 	private ArrayList<Alumno> alumnosInscriptosAlaMateria;
 	private Nota nota;
+	private ArrayList<Profesor> profesores;
 	private static Integer CONTADOR_MATERIAS = 1;
 	private Dias dias;
 	private Horario horarios;
@@ -21,6 +22,7 @@ public class Materia {
 		this.codigoMateria = CONTADOR_MATERIAS++;
 		this.dias = dias;
 		this.horarios = horarios;
+		profesores = new ArrayList<Profesor>();
 	}
 
 	public String getNombre() {
@@ -57,6 +59,14 @@ public class Materia {
 			isPromocionada = true;
 		}
 
+	}
+
+	public ArrayList<Profesor> getProfesores() {
+		return profesores;
+	}
+
+	public void setProfesores(ArrayList<Profesor> profesores) {
+		this.profesores = profesores;
 	}
 
 	public Nota getNota() {

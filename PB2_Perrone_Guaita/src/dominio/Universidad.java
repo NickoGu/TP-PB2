@@ -152,17 +152,35 @@ public class Universidad {
 
 	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, CicloLectivo cicloLectivo) {
 		Boolean pudoAsignar = false;
-		//Para asignar el curso debo chequear que el aula tenga la capacidad suficiente, 
-		
-		
-		
+		// Para asignar el curso debo chequear que el aula tenga la capacidad
+		// suficiente,
+
 		return pudoAsignar;
 	}
 
-	
-	
-	
-	
-	
-	
+	public void asignarProfesor(ArrayList<Profesor> profesores, Materia materia) {
+		// Para asignar profesor se debe contar la cantidad de alumnos
+		Integer contadorDeProfes = this.contarProfesores(materia);
+
+		if (profesores.size() > contadorDeProfes) {
+			for (int i = 0; i < contadorDeProfes; i++) {
+				materia.getProfesores().add(profesores.get(i));
+			}
+		}
+
+	}
+
+	public Integer contarProfesores(Materia materia) {
+		Integer cantidadDeProfesoresAasignar = 0, cantidadDeAlumnos = 0;
+
+		for (int i = 0; i < materia.getAlumnos().size(); i++) {
+			if (materia.getAlumnos().get(i) != null) {
+				cantidadDeAlumnos++;
+			}
+		}
+		cantidadDeProfesoresAasignar = cantidadDeAlumnos / 20;
+
+		return cantidadDeProfesoresAasignar;
+	}
+
 }
