@@ -14,6 +14,7 @@ public class Materia {
 	private Dias dias;
 	private Horario horarios;
 	private ArrayList<Curso> comisiones;
+	private Aula aula;
 
 	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
@@ -25,6 +26,7 @@ public class Materia {
 		this.horarios = horarios;
 		profesores = new ArrayList<Profesor>();
 		comisiones = new ArrayList<Curso>();
+		aula = new Aula();
 	}
 
 	public String getNombre() {
@@ -134,6 +136,15 @@ public class Materia {
 	public void setComisiones(ArrayList<Curso> comisiones) {
 		this.comisiones = comisiones;
 	}
+
+	public Aula getAula() {
+		return aula;
+	}
+
+	public void setAula(Aula aula) {
+		this.aula = aula;
+	}
+	
 	
 
 }

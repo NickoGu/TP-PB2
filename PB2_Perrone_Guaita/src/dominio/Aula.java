@@ -7,6 +7,9 @@ public class Aula {
 	private Integer numAula;
 	private static Integer CONTADOR_AULAS = 1;
 	private static ArrayList<Aula> AULAS = new ArrayList<Aula>();
+	private ArrayList<Curso> cursos;
+	private Horario horarios;
+	private Materia materia;
 
 	// cada vez que se cree un aula se va agregar de manera automatica a la lista de
 	// aulas
@@ -16,6 +19,19 @@ public class Aula {
 		this.numAula = CONTADOR_AULAS++;
 		capacidad = (int) (Math.random() * 200 + 50);
 		AULAS.add(this);
+		cursos = new ArrayList<Curso>();
+	}
+
+	public Boolean asignarTurno(Horario horarios, Materia materia) {
+		Boolean sePudoAsignar = false;
+
+		if (this.horarios == null && this.materia == null) {
+			this.horarios = horarios;
+			this.materia = materia;
+			sePudoAsignar = true;
+		}
+
+		return sePudoAsignar;
 	}
 
 	public Integer getCapacidad() {

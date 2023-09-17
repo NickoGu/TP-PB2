@@ -2,12 +2,10 @@ package dominio;
 
 import java.util.ArrayList;
 
-
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
-
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
@@ -96,7 +94,7 @@ public class Universidad {
 	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
-		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)) {
+		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse) && buscarAlumno(alumno.getDni()) != null) {
 			alumno.getMaterias().add(materiaAinscribirse);
 			materiaAinscribirse.getAlumnos().add(alumno);
 			sePudoInscribir = true;
@@ -150,8 +148,9 @@ public class Universidad {
 
 	}
 
-	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar) {
+	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar, Horario horarios) {
 		Boolean pudoAsignar = false;
+
 		// Para asignar el curso debo chequear que el aula tenga la capacidad
 		// suficiente,
 		// Va haber una lista de aulas, las cuales se van a generar con distintas
@@ -164,12 +163,13 @@ public class Universidad {
 			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
 				alum3.getComisiones().add(cursoAasignar);
 				pb1.getComisiones().add(cursoAasignar);
+				Aula.getAulas().get(i).asignarTurno(horarios, pb1);
+
 				pudoAsignar = true;
 				break;
 			}
 
 		}
-		
 
 		return pudoAsignar;
 	}
