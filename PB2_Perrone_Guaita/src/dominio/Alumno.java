@@ -8,12 +8,14 @@ public class Alumno {
 	private Integer dni;
 	private ArrayList<Nota> notas;
 	private ArrayList<Materia> materias;
+	private ArrayList<Curso> comisiones;
 
 	public Alumno(String nombre, String apellido, Integer dni) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		materias = new ArrayList<Materia> ();
+		comisiones = new ArrayList<Curso>();
 	}
 
 	public String getNombre() {
@@ -55,6 +57,15 @@ public class Alumno {
 	public void setMaterias(ArrayList<Materia> materias) {
 		this.materias = materias;
 	}
+
+	public ArrayList<Curso> getComisiones() {
+		return comisiones;
+	}
+
+	public void setComisiones(ArrayList<Curso> comisiones) {
+		this.comisiones = comisiones;
+	}
+	
 	
 	
 	

@@ -13,6 +13,7 @@ public class Materia {
 	private static Integer CONTADOR_MATERIAS = 1;
 	private Dias dias;
 	private Horario horarios;
+	private ArrayList<Curso> comisiones;
 
 	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
@@ -23,6 +24,7 @@ public class Materia {
 		this.dias = dias;
 		this.horarios = horarios;
 		profesores = new ArrayList<Profesor>();
+		comisiones = new ArrayList<Curso>();
 	}
 
 	public String getNombre() {
@@ -108,5 +110,30 @@ public class Materia {
 	public void setHorarios(Horario horarios) {
 		this.horarios = horarios;
 	}
+
+	public ArrayList<Alumno> getAlumnosInscriptosAlaMateria() {
+		return alumnosInscriptosAlaMateria;
+	}
+
+	public void setAlumnosInscriptosAlaMateria(ArrayList<Alumno> alumnosInscriptosAlaMateria) {
+		this.alumnosInscriptosAlaMateria = alumnosInscriptosAlaMateria;
+	}
+
+	public static Integer getCONTADOR_MATERIAS() {
+		return CONTADOR_MATERIAS;
+	}
+
+	public static void setCONTADOR_MATERIAS(Integer cONTADOR_MATERIAS) {
+		CONTADOR_MATERIAS = cONTADOR_MATERIAS;
+	}
+
+	public ArrayList<Curso> getComisiones() {
+		return comisiones;
+	}
+
+	public void setComisiones(ArrayList<Curso> comisiones) {
+		this.comisiones = comisiones;
+	}
+	
 
 }

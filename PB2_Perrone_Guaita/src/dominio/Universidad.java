@@ -1,13 +1,13 @@
 package dominio;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
-	private ArrayList<Curso> cursos;
+
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
@@ -150,10 +150,26 @@ public class Universidad {
 
 	}
 
-	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, CicloLectivo cicloLectivo) {
+	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar) {
 		Boolean pudoAsignar = false;
 		// Para asignar el curso debo chequear que el aula tenga la capacidad
 		// suficiente,
+		// Va haber una lista de aulas, las cuales se van a generar con distintas
+		// capacidades
+		// este metodo va a buscar el aula con la capacidad necesaria y se la va asignar
+		// Al alumno le voy asignar la comision correspondiente a ese curso
+		// A la materia le voy asignar la comision correspondiente a ese curso.
+
+		for (int i = 0; i < Aula.getAulas().size(); i++) {
+			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
+				alum3.getComisiones().add(cursoAasignar);
+				pb1.getComisiones().add(cursoAasignar);
+				pudoAsignar = true;
+				break;
+			}
+
+		}
+		
 
 		return pudoAsignar;
 	}
