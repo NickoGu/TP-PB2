@@ -52,7 +52,6 @@ public class Universidad {
 		}
 	}
 
-
 	public Alumno buscarAlumno(Integer dniAlumno) {
 		Alumno alumnoEncontrado = null;
 
@@ -64,8 +63,6 @@ public class Universidad {
 		return alumnoEncontrado;
 
 	}
-	
-
 
 	public Materia buscarMateria(Integer codigoMateria) {
 		Materia materiaEncontrada = null;
@@ -123,8 +120,8 @@ public class Universidad {
 	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
-		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse) && buscarAlumno(alumno.getDni()) != null
-				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse)) {
+		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
+				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse) && alumno.getDni() != null) {
 			alumno.getMaterias().add(materiaAinscribirse);
 			materiaAinscribirse.getAlumnos().add(alumno);
 			sePudoInscribir = true;
@@ -215,46 +212,18 @@ public class Universidad {
 		return pudoAsignar;
 	}
 
-	public void asignarProfesor(ArrayList<Profesor> profesores, Materia materia) {
-		// Para asignar profesor se debe contar la cantidad de alumnos
-		Integer contadorDeProfes = this.contarProfesores(materia);
-
-		if (profesores.size() > contadorDeProfes) {
-			for (int i = 0; i < contadorDeProfes; i++) {
-				materia.getProfesores().add(profesores.get(i));
-			}
-		}
-
-	}
-
-	public Integer contarProfesores(Materia materia) {
-		Integer cantidadDeProfesoresAasignar = 0, cantidadDeAlumnos = 0;
-
-		for (int i = 0; i < materia.getAlumnos().size(); i++) {
-			if (materia.getAlumnos().get(i) != null) {
-				cantidadDeAlumnos++;
-			}
-		}
-		cantidadDeProfesoresAasignar = cantidadDeAlumnos / 20;
-
-		return cantidadDeProfesoresAasignar;
-	} 
-
 	public Integer materiasAprobadas(Integer dni) {
 		Integer materiasAprobadas = 0;
-		
+
 		Alumno alumno = this.buscarAlumno(dni);
 		for (int i = 0; i < alumno.getMaterias().size(); i++) {
-			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(), alumno.getNotas().get(i).getSegundoParcial());
-			if(alumno.getMaterias().get(i).getIsPromocionada() == true) {
+			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(),
+					alumno.getNotas().get(i).getSegundoParcial());
+			if (alumno.getMaterias().get(i).getIsPromocionada() == true) {
 				materiasAprobadas++;
 			}
 		}
-		
 
-		
-		
-		
 		return materiasAprobadas;
 	}
 

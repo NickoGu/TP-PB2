@@ -19,7 +19,7 @@ public class TestUniversidad {
 
 	@Test
 	public void verificarQueSePuedaInscribirAlumnoEnUniversidad() {
-
+		
 		String nombre = "Martina";
 		String apellido = "Perrone";
 		Integer dni = 46119380;
