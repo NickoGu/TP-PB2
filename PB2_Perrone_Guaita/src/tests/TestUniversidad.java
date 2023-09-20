@@ -6,13 +6,6 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import dominio.Alumno;
-import dominio.Dias;
-import dominio.Horario;
-import dominio.Materia;
-import dominio.Nota;
-import dominio.Profesor;
-import dominio.Universidad;
 import dominio.*;
 
 public class TestUniversidad {
@@ -53,11 +46,19 @@ public class TestUniversidad {
 	@Test
 	public void verificarQueSePuedaInscribirAlumnoEnMateria() {
 
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
 		Nota nota = new Nota(5, 10);
-		CicloLectivo cicloLectivo = new CicloLectivo();
+	
 
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
@@ -65,7 +66,7 @@ public class TestUniversidad {
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
 		Universidad universidad = new Universidad();
-		universidad.inscribirAlumnoAMateria(alumno, materia, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia,cicloLectivo, LocalDate.of(2023, 2, 25));
 
 		Boolean seInscribió = materia.getAlumnos().contains(alumno);
 
@@ -74,7 +75,15 @@ public class TestUniversidad {
 
 	@Test
 	public void verificarQueNoRepitaHorarioYDiaAlInscribirseEnUnaMateria() {
+		
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
 
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
@@ -87,12 +96,12 @@ public class TestUniversidad {
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
 		Universidad universidad = new Universidad();
-		universidad.inscribirAlumnoAMateria(alumno, materia, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia,cicloLectivo, LocalDate.of(2023, 2, 25));
 
 
 		if (universidad.verificarHorariosYDias(alumno, materia2) == true) {
 
-			universidad.inscribirAlumnoAMateria(alumno, materia2, LocalDate.of(2023, 2, 25));
+			universidad.inscribirAlumnoAMateria(alumno, materia2,cicloLectivo, LocalDate.of(2023, 2, 25));
 		}
 
 		Boolean seInscribió = alumno.getMaterias().contains(materia2);

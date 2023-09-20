@@ -9,6 +9,7 @@ public class Universidad {
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
 	private ArrayList<CicloLectivo> ciclosLectivos;
+	private CicloLectivo cicloLectivoActual;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
@@ -117,7 +118,7 @@ public class Universidad {
 		return estáLibre;
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, LocalDate fechaAinscribirse) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse,CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
@@ -293,7 +294,7 @@ public class Universidad {
 		CicloLectivo encontrado = null;
 
 		for (int i = 0; i < this.ciclosLectivos.size(); i++) {
-			if (this.ciclosLectivos.get(i).equals(nuevoCiclo)) {
+			if (this.ciclosLectivos.get(i).getId().equals(nuevoCiclo.getId())) {
 				encontrado = this.ciclosLectivos.get(i);
 			}
 		}

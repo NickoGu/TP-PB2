@@ -34,9 +34,17 @@ public class TestCurso {
 
 	@Test
 	public void queSeLeAsigneUnCursoAunaMateriaYalumnoCorrectmente() {
+		
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		
 		Curso curso = new Curso(), curso2 = new Curso(), curso3 = new Curso(), curso4 = new Curso();
 		Materia pb1 = new Materia("PB2", 321, Dias.LUNES, Horario.TURNO_MANANA);
-		CicloLectivo cicloLectivo = new CicloLectivo();
 		Aula aula1 = new Aula(), aula2 = new Aula(), aula3 = new Aula(), aula4 = new Aula();
 		Alumno alum1 = new Alumno("Martina", "Perrone", 1111), alum2 = new Alumno("Martina", "Perrone", 333),
 				alum3 = new Alumno("Martina", "Perrone", 333);
@@ -50,9 +58,9 @@ public class TestCurso {
 		// Luego resgistro materias
 		uni.registrarMateria(pb1);
 		// Luego inscribo alumnos en materias
-		uni.inscribirAlumnoAMateria(alum1, pb1, LocalDate.of(2023, 1, 25));
-		uni.inscribirAlumnoAMateria(alum2, pb1, LocalDate.of(2023, 1, 25));
-		uni.inscribirAlumnoAMateria(alum3, pb1, LocalDate.of(2023, 1, 25));
+		uni.inscribirAlumnoAMateria(alum1, pb1,cicloLectivo, LocalDate.of(2023, 1, 25));
+		uni.inscribirAlumnoAMateria(alum2, pb1,cicloLectivo, LocalDate.of(2023, 1, 25));
+		uni.inscribirAlumnoAMateria(alum3, pb1,cicloLectivo, LocalDate.of(2023, 1, 25));
 		
 
 		assertTrue(uni.asignarCursoAmateriaYalumno(pb1, alum3, curso2, Horario.TURNO_MANANA));

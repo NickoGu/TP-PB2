@@ -11,14 +11,21 @@ public class TestProfesor {
 
 	@Test
 	public void queSeAsigne1ProfesorCada20Alumnos() {
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
 
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		
 		Profesor profe = new Profesor("Nico", 1111), profe2 = new Profesor("Nico", 1111),
 				profe3 = new Profesor("Nico", 1111), profe4 = new Profesor("Nico", 1111);
 		Universidad uni = new Universidad();
 		AsignacionCursoProfe asignarProfe = new AsignacionCursoProfe();	
 		Materia pb1 = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		Alumno alumno = new Alumno("Martu", "Pe", 12342);
-		uni.inscribirAlumnoAMateria(alumno, pb1, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
 		Alumno alumno2 = new Alumno("Martu", "Pe", 123344);
 		Alumno alumno3= new Alumno("Martu", "Pe", 1235324);
 		Alumno alumno4 = new Alumno("Martu", "Pe", 1235324);
@@ -41,29 +48,29 @@ public class TestProfesor {
 		Alumno alumno52352 = new Alumno("Martu", "Pe", 12999934);
 		Alumno alumno2532 = new Alumno("Martu", "Pe", 12388884);
 		Alumno alumno532523 = new Alumno("Martu", "Pe", 1237373734);
-		uni.inscribirAlumnoAMateria(alumno2, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno3, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno4, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno5, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno6, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno7, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno8, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno9, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno0, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno2432, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno332, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno542, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno64, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno32, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno532, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno53253, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno32532, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno53252, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno53252, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno3522352, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno52352, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno2532, pb1, LocalDate.of(2023, 2, 25));
-		uni.inscribirAlumnoAMateria(alumno532523, pb1, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno2, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno3, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno4, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno5, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno6, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno7, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno8, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno9, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno0, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno2432, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno332, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno542, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno64, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno32, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno532, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno53253, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno32532, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno53252, pb1,cicloLectivo,  LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno53252, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno3522352, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno52352, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno2532, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
+		uni.inscribirAlumnoAMateria(alumno532523, pb1,cicloLectivo, LocalDate.of(2023, 2, 25));
 		
 		
 		ArrayList<Profesor> profesores = new ArrayList<Profesor>();
