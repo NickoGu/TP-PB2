@@ -120,8 +120,8 @@ public class Universidad {
 	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
-		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse) && buscarAlumno(alumno.getDni()) != null
-				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse)) {
+		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
+				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse) && alumno.getDni() != null) {
 			alumno.getMaterias().add(materiaAinscribirse);
 			materiaAinscribirse.getAlumnos().add(alumno);
 			sePudoInscribir = true;
@@ -236,6 +236,7 @@ public class Universidad {
 
 		return cantidadDeProfesoresAasignar;
 	}
+
 
 	public Integer materiasAprobadas(Integer dni) {
 		Integer materiasAprobadas = 0;
