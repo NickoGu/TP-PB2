@@ -12,12 +12,13 @@ public class CicloLectivo {
 	private Cuatrimestres cuatris;
 	private static Integer CONTADOR_ID_CICLOS_LECTIVOS = 1;
 
-	public CicloLectivo() {
+	public CicloLectivo(LocalDate fechaInicioCicloLectivo, LocalDate fechaFinalizacionCicloLectivo,
+			LocalDate fechaInicioInscripcion, LocalDate fechaFinalizacionInscripcion) {
 		this.Id = CONTADOR_ID_CICLOS_LECTIVOS++;
-		this.fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
-		this.fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
-		this.fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
-		this.fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+		this.fechaInicioCicloLectivo = fechaInicioCicloLectivo;
+		this.fechaFinalizacionCicloLectivo = fechaFinalizacionCicloLectivo;
+		this.fechaInicioInscripcion = fechaInicioInscripcion;
+		this.fechaFinalizacionInscripcion = fechaFinalizacionInscripcion;
 	}
 
 	public Boolean determinarSiPasoElLapso(LocalDate fechaDeRegistro) {

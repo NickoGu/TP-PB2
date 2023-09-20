@@ -8,13 +8,13 @@ public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
-	private CicloLectivo cicloLectivo;
+	private ArrayList<CicloLectivo> ciclosLectivos;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
 		alumnosInscriptos = new ArrayList<Alumno>();
 		profesores = new ArrayList<Profesor>();
-		this.cicloLectivo = new CicloLectivo();
+		ciclosLectivos = new ArrayList<CicloLectivo>();
 
 	}
 
@@ -52,7 +52,6 @@ public class Universidad {
 		}
 	}
 
-
 	public Alumno buscarAlumno(Integer dniAlumno) {
 		Alumno alumnoEncontrado = null;
 
@@ -64,8 +63,6 @@ public class Universidad {
 		return alumnoEncontrado;
 
 	}
-	
-
 
 	public Materia buscarMateria(Integer codigoMateria) {
 		Materia materiaEncontrada = null;
@@ -238,24 +235,69 @@ public class Universidad {
 		cantidadDeProfesoresAasignar = cantidadDeAlumnos / 20;
 
 		return cantidadDeProfesoresAasignar;
-	} 
+	}
 
 	public Integer materiasAprobadas(Integer dni) {
 		Integer materiasAprobadas = 0;
-		
+
 		Alumno alumno = this.buscarAlumno(dni);
 		for (int i = 0; i < alumno.getMaterias().size(); i++) {
-			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(), alumno.getNotas().get(i).getSegundoParcial());
-			if(alumno.getMaterias().get(i).getIsPromocionada() == true) {
+			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(),
+					alumno.getNotas().get(i).getSegundoParcial());
+			if (alumno.getMaterias().get(i).getIsPromocionada() == true) {
 				materiasAprobadas++;
 			}
 		}
-		
 
-		
-		
-		
 		return materiasAprobadas;
+	}
+
+	public Boolean registrarCicloLectivo(CicloLectivo nuevoCiclo) {
+		Boolean seRegistro = false;
+		CicloLectivo encontradoPorId = buscarCicloPorId(nuevoCiclo);
+		CicloLectivo encontradoPorFechasSuperpuestas = buscarPorFechasSuperpuestas(nuevoCiclo);
+
+		if (encontradoPorId == null && encontradoPorFechasSuperpuestas == null) {
+			this.ciclosLectivos.add(nuevoCiclo);
+			seRegistro = true;
+
+		}
+
+		return seRegistro;
+
+	}
+
+	private CicloLectivo buscarPorFechasSuperpuestas(CicloLectivo nuevoCiclo) {
+		CicloLectivo cicloSuperpuestoEncontrado = null;
+
+		for (int i = 0; i < ciclosLectivos.size(); i++) {
+			if ((nuevoCiclo.getFechaInicioCicloLectivo()
+					.isAfter(this.ciclosLectivos.get(i).getFechaInicioCicloLectivo())
+					&& nuevoCiclo.getFechaInicioCicloLectivo()
+							.isBefore(this.ciclosLectivos.get(i).getFechaFinalizacionCicloLectivo()))
+					|| (nuevoCiclo.getFechaFinalizacionCicloLectivo()
+							.isAfter(this.ciclosLectivos.get(i).getFechaInicioCicloLectivo())
+							&& nuevoCiclo.getFechaFinalizacionCicloLectivo()
+									.isBefore(this.ciclosLectivos.get(i).getFechaFinalizacionCicloLectivo()))) {
+
+				cicloSuperpuestoEncontrado = this.ciclosLectivos.get(i);
+
+			}
+		}
+
+		return cicloSuperpuestoEncontrado;
+	}
+
+	private CicloLectivo buscarCicloPorId(CicloLectivo nuevoCiclo) {
+		CicloLectivo encontrado = null;
+
+		for (int i = 0; i < this.ciclosLectivos.size(); i++) {
+			if (this.ciclosLectivos.get(i).equals(nuevoCiclo)) {
+				encontrado = this.ciclosLectivos.get(i);
+			}
+		}
+
+		return encontrado;
 	}
 
 }
