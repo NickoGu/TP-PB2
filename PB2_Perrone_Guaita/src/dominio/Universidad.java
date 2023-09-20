@@ -1,6 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
@@ -37,6 +38,8 @@ public class Universidad {
 		return alumnoEncontrado;
 
 	}
+	
+
 
 	public Materia buscarMateria(Integer codigoMateria) {
 		Materia materiaEncontrada = null;
@@ -197,6 +200,24 @@ public class Universidad {
 		cantidadDeProfesoresAasignar = cantidadDeAlumnos / 20;
 
 		return cantidadDeProfesoresAasignar;
+	} 
+
+	public Integer materiasAprobadas(Integer dni) {
+		Integer materiasAprobadas = 0;
+		
+		Alumno alumno = this.buscarAlumno(dni);
+		for (int i = 0; i < alumno.getMaterias().size(); i++) {
+			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(), alumno.getNotas().get(i).getSegundoParcial());
+			if(alumno.getMaterias().get(i).getIsPromocionada() == true) {
+				materiasAprobadas++;
+			}
+		}
+		
+
+		
+		
+		
+		return materiasAprobadas;
 	}
 
 }

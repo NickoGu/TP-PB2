@@ -48,14 +48,10 @@ public class TestUniversidad {
 	@Test
 	public void verificarQueSePuedaInscribirAlumnoEnMateria() {
 
-		
-		
-		
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
 		Nota nota = new Nota(5, 10);
-		
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
@@ -68,8 +64,7 @@ public class TestUniversidad {
 
 		assertTrue(seInscribió);
 	}
-	
-	
+
 	@Test
 	public void verificarQueNoRepitaHorarioYDiaAlInscribirseEnUnaMateria() {
 
@@ -77,7 +72,6 @@ public class TestUniversidad {
 		String apellido = "Guaita";
 		Integer dni = 12345678;
 		Nota nota = new Nota(5, 10);
-
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
 		materia.setNota(nota);
@@ -87,16 +81,40 @@ public class TestUniversidad {
 
 		Universidad universidad = new Universidad();
 		universidad.inscribirAlumnoAMateria(alumno, materia);
-		
-		if(universidad.verificarHorariosYDias(alumno, materia2) == true) {
+
+		if (universidad.verificarHorariosYDias(alumno, materia2) == true) {
 			universidad.inscribirAlumnoAMateria(alumno, materia2);
 		}
-		
+
 		Boolean seInscribió = alumno.getMaterias().contains(materia2);
 
 		assertTrue(seInscribió);
 	}
-	
-	
 
+	@Test
+	public void obtenerMateriasAprobadasParaUnAlumno() {
+
+		String nombre = "Nico";
+		String apellido = "Guaita";
+		Integer dni = 12345678;
+		Nota nota = new Nota(5, 10);
+		Nota nota2 = new Nota(10, 10);
+
+		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
+		materia.setNota(nota);
+		Materia materia2 = new Materia("Inglés", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		materia2.setNota(nota2);
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+
+		Universidad universidad = new Universidad();
+		universidad.inscribirAlumnoAuiversidad(alumno);
+		
+		Integer materiasAprobadas =	universidad.materiasAprobadas(alumno.getDni());
+		Integer ve = 1;
+		assertEquals(ve, materiasAprobadas);
+		
+	}
+
+	
+	
 }
