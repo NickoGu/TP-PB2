@@ -1,5 +1,6 @@
 package dominio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,25 +8,50 @@ public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
+	private CicloLectivo cicloLectivo;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
 		alumnosInscriptos = new ArrayList<Alumno>();
 		profesores = new ArrayList<Profesor>();
+		this.cicloLectivo = new CicloLectivo();
+
 	}
 
 	// Inscribir alumno
 	public void inscribirAlumnoAuiversidad(Alumno alumno) {
-		alumnosInscriptos.add(alumno);
 
+		boolean alumnoExiste = false;
+
+		for (int i = 0; i < alumnosInscriptos.size(); i++) {
+			if (alumno.getDni().equals(alumnosInscriptos.get(i).getDni())) {
+				alumnoExiste = true;
+				break;
+			}
+		}
+
+		if (!alumnoExiste) {
+			alumnosInscriptos.add(alumno);
+		}
 	}
 
 	// registrar materia
 	public void registrarMateria(Materia materia) {
 
-		materiasRegistradas.add(materia);
+		boolean materiaExiste = false;
 
+		for (int i = 0; i < materiasRegistradas.size(); i++) {
+			if (materia.getIdMateria().equals(materiasRegistradas.get(i).getIdMateria())) {
+				materiaExiste = true;
+				break;
+			}
+		}
+
+		if (!materiaExiste) {
+			materiasRegistradas.add(materia);
+		}
 	}
+
 
 	public Alumno buscarAlumno(Integer dniAlumno) {
 		Alumno alumnoEncontrado = null;
@@ -94,10 +120,11 @@ public class Universidad {
 		return estáLibre;
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
-		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse) && buscarAlumno(alumno.getDni()) != null) {
+		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse) && buscarAlumno(alumno.getDni()) != null
+				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse)) {
 			alumno.getMaterias().add(materiaAinscribirse);
 			materiaAinscribirse.getAlumnos().add(alumno);
 			sePudoInscribir = true;
@@ -147,8 +174,19 @@ public class Universidad {
 	}
 
 	public void inscribirProfesor(Profesor profesor) {
-		profesores.add(profesor);
 
+		boolean profesorExistente = false;
+
+		for (int i = 0; i < profesores.size(); i++) {
+			if (profesor.getDni() == profesores.get(i).getDni()) {
+				profesorExistente = true;
+				break;
+			}
+		}
+
+		if (!profesorExistente) {
+			profesores.add(profesor);
+		}
 	}
 
 	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar, Horario horarios) {

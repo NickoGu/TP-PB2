@@ -2,9 +2,11 @@ package tests;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
 
-
+import dominio.Alumno;
+import dominio.Curso;
 import dominio.Dias;
 import dominio.Horario;
 import dominio.Materia;
@@ -13,6 +15,9 @@ import dominio.Universidad;
 
 public class TestMateria {
 
+	
+
+	
 	// Chequea las notas y verifica que este promocionada
 
 	@Test
@@ -25,6 +30,22 @@ public class TestMateria {
 		Materia materia = new Materia(nombreMateria, codigoMateria, Dias.LUNES, Horario.TURNO_MANANA);
 		assertEquals(materia.getNombre(), nombreMateria);
 		assertEquals(materia.getCodigoMateria(), codigoMateria);
+	}
+	
+	@Test
+	public void verificarQueSePuedaInscribirUnaMateriaEnLaUniversidad() {
+
+		String nombreMateria = "Programacion 2";
+		Integer codigoMateria = 123456;
+
+		Materia materia = new Materia(nombreMateria, codigoMateria, Dias.LUNES, Horario.TURNO_MANANA);
+		Universidad universidad = new Universidad();
+		universidad.registrarMateria(materia);
+
+
+		Boolean seInscribió = universidad.getMateriasRegistradas().contains(materia);
+
+		assertTrue(seInscribió);
 	}
 
 	@Test
@@ -47,8 +68,6 @@ public class TestMateria {
 
 		Universidad universidad = new Universidad();
 	
-		
-		
 		
 		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
