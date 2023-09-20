@@ -76,9 +76,9 @@ public class TestMateria {
 		universidad.registrarMateria(materia2);
 		universidad.agregarUnaCorrelativaAunaMateria(materia, materia2);
 
-		Materia correlativaAsignada = materia.getCorrelativas().get(0);
+		Boolean correlativaAsignada = materia.getCorrelativas().contains(materia2);
 
-		assertNotNull(correlativaAsignada);
+		assertTrue(correlativaAsignada);
 
 	}
 	

@@ -144,7 +144,7 @@ public class Universidad {
 		Materia materiaAagregarExiste = this.buscarMateria(materiaAagregarComoCorrelativa.getCodigoMateria());
 
 		if (materiaExiste != null && materiaAagregarExiste != null) {
-			materiaAagregarExiste.agregarCorrelativa(materiaAagregarComoCorrelativa);
+			materia.agregarCorrelativa(materiaAagregarComoCorrelativa);
 		}
 
 	}
