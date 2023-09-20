@@ -1,5 +1,6 @@
 package tests;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import dominio.*;
 import static org.junit.Assert.*;
@@ -16,7 +17,7 @@ public class TestProfesor {
 		Materia pb1 = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		for (int i = 0; i < 41; i++) {
 			Alumno alum = new Alumno("Martu", "Perrone", 1111);
-			uni.inscribirAlumnoAMateria(alum, pb1);
+			uni.inscribirAlumnoAMateria(alum, pb1, LocalDate.of(2023, 1, 25));
 		}
 
 		ArrayList<Profesor> profesores = new ArrayList<Profesor>();

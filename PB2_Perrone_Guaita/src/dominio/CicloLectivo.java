@@ -5,15 +5,29 @@ import java.time.LocalDate;
 public class CicloLectivo {
 
 	private Integer Id;
-	private LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
-	private LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
-	private LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
-	private LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+	private LocalDate fechaInicioCicloLectivo;
+	private LocalDate fechaFinalizacionCicloLectivo;
+	private LocalDate fechaInicioInscripcion;
+	private LocalDate fechaFinalizacionInscripcion;
 	private Cuatrimestres cuatris;
 	private static Integer CONTADOR_ID_CICLOS_LECTIVOS = 1;
 
 	public CicloLectivo() {
 		this.Id = CONTADOR_ID_CICLOS_LECTIVOS++;
+		this.fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		this.fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		this.fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		this.fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+	}
+
+	public Boolean determinarSiPasoElLapso(LocalDate fechaDeRegistro) {
+		Boolean iscripcionAceptada = false;
+		if (fechaDeRegistro.isAfter(fechaInicioInscripcion) && fechaDeRegistro.isBefore(fechaFinalizacionInscripcion)) {
+			iscripcionAceptada = true;
+		}
+
+		return iscripcionAceptada;
+
 	}
 
 	public Integer getId() {
@@ -71,7 +85,5 @@ public class CicloLectivo {
 	public void setCuatris(Cuatrimestres cuatris) {
 		this.cuatris = cuatris;
 	}
-	
-	
 
 }

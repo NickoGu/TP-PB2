@@ -3,6 +3,8 @@ package tests;
 import dominio.*;
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,9 +50,9 @@ public class TestCurso {
 		// Luego resgistro materias
 		uni.registrarMateria(pb1);
 		// Luego inscribo alumnos en materias
-		uni.inscribirAlumnoAMateria(alum1, pb1);
-		uni.inscribirAlumnoAMateria(alum2, pb1);
-		uni.inscribirAlumnoAMateria(alum3, pb1);
+		uni.inscribirAlumnoAMateria(alum1, pb1, LocalDate.of(2023, 1, 25));
+		uni.inscribirAlumnoAMateria(alum2, pb1, LocalDate.of(2023, 1, 25));
+		uni.inscribirAlumnoAMateria(alum3, pb1, LocalDate.of(2023, 1, 25));
 		
 
 		assertTrue(uni.asignarCursoAmateriaYalumno(pb1, alum3, curso2, Horario.TURNO_MANANA));
