@@ -17,9 +17,6 @@ import dominio.Universidad;
 
 public class TestMateria {
 
-	
-
-	
 	// Chequea las notas y verifica que este promocionada
 
 	@Test
@@ -28,12 +25,11 @@ public class TestMateria {
 		String nombreMateria = "Programacion 2";
 		Integer codigoMateria = 123456;
 
-
 		Materia materia = new Materia(nombreMateria, codigoMateria, Dias.LUNES, Horario.TURNO_MANANA);
 		assertEquals(materia.getNombre(), nombreMateria);
 		assertEquals(materia.getCodigoMateria(), codigoMateria);
 	}
-	
+
 	@Test
 	public void verificarQueSePuedaInscribirUnaMateriaEnLaUniversidad() {
 
@@ -44,7 +40,6 @@ public class TestMateria {
 		Universidad universidad = new Universidad();
 		universidad.registrarMateria(materia);
 
-
 		Boolean seInscribió = universidad.getMateriasRegistradas().contains(materia);
 
 		assertTrue(seInscribió);
@@ -54,7 +49,6 @@ public class TestMateria {
 	public void verificarQueLaMateriaEstáAprobada() {
 
 		Nota nota = new Nota(8, 8);
-
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
@@ -69,8 +63,7 @@ public class TestMateria {
 	public void verificarSiUnaMateriaTieneCorrelativas() {
 
 		Universidad universidad = new Universidad();
-	
-		
+
 		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
 
@@ -83,13 +76,12 @@ public class TestMateria {
 		assertTrue(correlativaAsignada);
 
 	}
-	
+
 	@Test
 	public void verificarSiSePuedeEliminarUnaCorrelativas() {
 
 		Universidad universidad = new Universidad();
-	
-		
+
 		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
 
@@ -103,11 +95,10 @@ public class TestMateria {
 		assertFalse(correlativaAsignada);
 
 	}
-	
-	
+
 	@Test
 	public void queSePuedaAgregarUnaComisionAunaMateria() {
-		
+
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
 		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
 		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
@@ -117,15 +108,32 @@ public class TestMateria {
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
 		Curso comision = new Curso();
-		
+
 		Boolean sePudoAgregar = materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
-		
+
 		assertTrue(sePudoAgregar);
-		
-		
+
 	}
-	
-	
+
+	@Test
+	public void queNoSePuedaAgregarUnaComisionAunaMateria() {
+
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
+		Curso comision = new Curso();
+
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+		Boolean noSePudoAgregar = materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+
+		assertFalse(noSePudoAgregar);
+
+	}
 
 //	@Test
 //	public void verificarSiAdeudaCorrelativa() {
