@@ -9,7 +9,7 @@ public class Universidad {
 	private ArrayList<Materia> materiasRegistradas;
 	private ArrayList<Profesor> profesores;
 	private ArrayList<CicloLectivo> ciclosLectivos;
-	private CicloLectivo cicloLectivoActual;
+	private ArrayList<Curso> comisiones;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
@@ -118,7 +118,8 @@ public class Universidad {
 		return estáLibre;
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse,CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, CicloLectivo cicloLectivo,
+			LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
@@ -201,7 +202,6 @@ public class Universidad {
 		for (int i = 0; i < Aula.getAulas().size(); i++) {
 			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
 				alum3.getComisiones().add(cursoAasignar);
-				pb1.getComisiones().add(cursoAasignar);
 				Aula.getAulas().get(i).asignarTurno(horarios, pb1);
 
 				pudoAsignar = true;
@@ -237,7 +237,6 @@ public class Universidad {
 
 		return cantidadDeProfesoresAasignar;
 	}
-
 
 	public Integer materiasAprobadas(Integer dni) {
 		Integer materiasAprobadas = 0;
@@ -301,5 +300,17 @@ public class Universidad {
 
 		return encontrado;
 	}
+
+	public void eliminarCorrelatividad(Materia materiaAeliminarleLaCorrelativa, Materia materiaCorrelativa) {
+		Materia materiaAeliminarle = this.buscarMateria(materiaAeliminarleLaCorrelativa.getCodigoMateria());
+		Materia materiaEliminada = this.buscarMateria(materiaCorrelativa.getCodigoMateria());
+
+		if (materiaAeliminarle != null && materiaEliminada != null) {
+			materiaAeliminarleLaCorrelativa.eliminarCorrelativa(materiaCorrelativa);
+		}
+
+	}
+
+
 
 }

@@ -16,6 +16,7 @@ public class Materia {
 	private Horario horarios;
 	private ArrayList<Curso> comisiones;
 	private Aula aula;
+	private CicloLectivo cicloLectivo;
 
 	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
@@ -27,7 +28,27 @@ public class Materia {
 		this.horarios = horarios;
 		profesores = new ArrayList<Profesor>();
 		comisiones = new ArrayList<Curso>();
+
 		aula = new Aula();
+	}
+
+	public Boolean agregarComision( CicloLectivo cicloLectivo, Curso comision, Horario turno) {
+	    // Verificamos si ya existe una comisión con los mismos datos
+	    for (int i = 0; i < comisiones.size(); i++) {
+	        Curso comisionExistente = comisiones.get(i);
+	        if (comisionExistente.getCicloLectivo().equals(cicloLectivo) &&
+	        		comisionExistente.getTurno().equals(turno)) {
+	            return false; // Ya existe una comisión con los mismos datos, no se puede agregar otra
+	        }
+	    }
+
+	    // Si no existe una comisión con los mismos datos, creamos una nueva comisión
+	    Curso nuevaComision = new Curso(comision, cicloLectivo, turno);
+	    
+	    // Agregamos la nueva comisión a la lista de comisiones de la materia
+	    comisiones.add(nuevaComision);
+	    
+	    return true; // Comisión agregada con éxito
 	}
 
 	public String getNombre() {
@@ -52,6 +73,10 @@ public class Materia {
 
 	public void setCorrelativas(ArrayList<Materia> correlativas) {
 		this.correlativas = correlativas;
+	}
+
+	public void eliminarCorrelativa(Materia materia) {
+		correlativas.remove(materia);
 	}
 
 	public void agregarCorrelativa(Materia materia) {
@@ -130,14 +155,6 @@ public class Materia {
 		CONTADOR_MATERIAS = cONTADOR_MATERIAS;
 	}
 
-	public ArrayList<Curso> getComisiones() {
-		return comisiones;
-	}
-
-	public void setComisiones(ArrayList<Curso> comisiones) {
-		this.comisiones = comisiones;
-	}
-
 	public Aula getAula() {
 		return aula;
 	}
@@ -153,7 +170,14 @@ public class Materia {
 	public void setIdMateria(Integer idMateria) {
 		this.idMateria = idMateria;
 	}
-	
-	
+
+
+	public CicloLectivo getCicloLectivo() {
+		return cicloLectivo;
+	}
+
+	public void setCicloLectivo(CicloLectivo cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
 
 }

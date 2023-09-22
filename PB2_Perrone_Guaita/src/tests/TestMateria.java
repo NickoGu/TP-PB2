@@ -2,10 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 
 import org.junit.Test;
 
 import dominio.Alumno;
+import dominio.CicloLectivo;
 import dominio.Curso;
 import dominio.Dias;
 import dominio.Horario;
@@ -83,10 +85,44 @@ public class TestMateria {
 	}
 	
 	@Test
-	public void verificarSiTeDejaInscribirAlumnoLuegoDeQueElCupoDelCursoSeHayaLlenado() {
+	public void verificarSiSePuedeEliminarUnaCorrelativas() {
 
+		Universidad universidad = new Universidad();
+	
 		
+		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
 
+		universidad.registrarMateria(materia);
+		universidad.registrarMateria(materia2);
+		universidad.agregarUnaCorrelativaAunaMateria(materia, materia2);
+		universidad.eliminarCorrelatividad(materia, materia2);
+
+		Boolean correlativaAsignada = materia.getCorrelativas().contains(materia2);
+
+		assertFalse(correlativaAsignada);
+
+	}
+	
+	
+	@Test
+	public void queSePuedaAgregarUnaComisionAunaMateria() {
+		
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
+		Curso comision = new Curso();
+		
+		Boolean sePudoAgregar = materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+		
+		assertTrue(sePudoAgregar);
+		
+		
 	}
 	
 	

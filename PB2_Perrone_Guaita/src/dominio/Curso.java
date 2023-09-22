@@ -4,18 +4,28 @@ import java.util.ArrayList;
 
 public class Curso {
 
-
 	private ArrayList<Alumno> alumnos;
 	private Aula aula;
 	private Profesor profesor;
 	private Integer codigoComision;
-	private CicloLectivo cicloLectivo;
 	private static Integer CONTADOR_MATERIAS = 1;
+	private Materia materia;
+	private CicloLectivo cicloLectivo;
+	private Horario turno;
+	private Curso comision;
 
+	
+	
 	public Curso() {
 		this.codigoComision = CONTADOR_MATERIAS++;
 	}
 
+	public Curso(Curso comision, CicloLectivo cicloLectivo, Horario turno) {
+		this.comision = comision;
+		this.cicloLectivo = cicloLectivo;
+		this.turno = turno;
+		this.codigoComision = CONTADOR_MATERIAS++;
+	}
 
 	public ArrayList<Alumno> getAlumnos() {
 		return alumnos;
@@ -64,8 +74,30 @@ public class Curso {
 	public static void setCONTADOR_MATERIAS(Integer cONTADOR_MATERIAS) {
 		CONTADOR_MATERIAS = cONTADOR_MATERIAS;
 	}
-	
-	
+
+	public Materia getMateria() {
+		return materia;
+	}
+
+	public void setMateria(Materia materia) {
+		this.materia = materia;
+	}
+
+	public Horario getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Horario turno) {
+		this.turno = turno;
+	}
+
+	public Curso getComision() {
+		return comision;
+	}
+
+	public void setComision(Curso comision) {
+		this.comision = comision;
+	}
 	
 
 }
