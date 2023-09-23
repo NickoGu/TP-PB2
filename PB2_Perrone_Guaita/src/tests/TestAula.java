@@ -2,10 +2,18 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import dominio.Aula;
+import dominio.CicloLectivo;
+import dominio.Curso;
+import dominio.Dias;
+import dominio.Horario;
+import dominio.Materia;
+import dominio.Universidad;
 
 public class TestAula {
 
@@ -46,15 +54,17 @@ public class TestAula {
 		Aula aula1 = new Aula();
 		Aula aula2 = new Aula();
 		Aula aula3 = new Aula();
-		
+
 		Integer capacidadAula1 = aula1.getCapacidad();
 		Integer capacidadAula2 = aula2.getCapacidad();
 		Integer capacidadAula3 = aula3.getCapacidad();
-		
+
 		assertTrue(capacidadAula1 >= 50 && capacidadAula1 < 250);
 		assertTrue(capacidadAula2 >= 50 && capacidadAula2 < 250);
 		assertTrue(capacidadAula3 >= 50 && capacidadAula3 < 250);
-		
+
 	}
+
+
 
 }

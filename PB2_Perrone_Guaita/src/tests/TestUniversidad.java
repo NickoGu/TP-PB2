@@ -12,7 +12,7 @@ public class TestUniversidad {
 
 	@Test
 	public void verificarQueSePuedaInscribirAlumnoEnUniversidad() {
-		
+
 		String nombre = "Martina";
 		String apellido = "Perrone";
 		Integer dni = 46119380;
@@ -40,8 +40,6 @@ public class TestUniversidad {
 
 		assertTrue(seInscribió);
 	}
-	
-	
 
 	@Test
 	public void verificarQueSePuedaInscribirAlumnoEnMateria() {
@@ -53,20 +51,18 @@ public class TestUniversidad {
 
 		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
-		
+
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
 		Nota nota = new Nota(5, 10);
-	
-
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
 		Universidad universidad = new Universidad();
-		universidad.inscribirAlumnoAMateria(alumno, materia,cicloLectivo, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
 
 		Boolean seInscribió = materia.getAlumnos().contains(alumno);
 
@@ -75,7 +71,7 @@ public class TestUniversidad {
 
 	@Test
 	public void verificarQueNoRepitaHorarioYDiaAlInscribirseEnUnaMateria() {
-		
+
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
 		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
 		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
@@ -83,7 +79,7 @@ public class TestUniversidad {
 
 		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
-		
+
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
@@ -96,12 +92,11 @@ public class TestUniversidad {
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
 		Universidad universidad = new Universidad();
-		universidad.inscribirAlumnoAMateria(alumno, materia,cicloLectivo, LocalDate.of(2023, 2, 25));
-
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
 
 		if (universidad.verificarHorariosYDias(alumno, materia2) == true) {
 
-			universidad.inscribirAlumnoAMateria(alumno, materia2,cicloLectivo, LocalDate.of(2023, 2, 25));
+			universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
 		}
 
 		Boolean seInscribió = alumno.getMaterias().contains(materia2);
@@ -109,6 +104,29 @@ public class TestUniversidad {
 		assertTrue(seInscribió);
 	}
 
+	@Test
+	public void queSePuedaInscribirAlumnoAlaComision() {
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+		String nombre = "Nico";
+		String apellido = "Guaita";
+		Integer dni = 12345;
+
+		Universidad universidad = new Universidad();
+		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		Curso comision = new Curso();
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+		universidad.registrarMateria(materia);
+		universidad.registrarMateria(materia2);
+		universidad.agregarUnaCorrelativaAunaMateria(materia, materia2);
+	}
 
 //	@Test
 //	public void obtenerMateriasAprobadasParaUnAlumno() {
@@ -134,6 +152,4 @@ public class TestUniversidad {
 //		
 //	}
 
-	
-	
 }
