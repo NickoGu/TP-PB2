@@ -33,7 +33,7 @@ public class Universidad {
 			}
 		}
 
-		if (!alumnoExiste) {
+		if (alumnoExiste == false) {
 			alumnosInscriptos.add(alumno);
 		}
 	}
@@ -316,14 +316,13 @@ public class Universidad {
 		Alumno alumnoEncontrado = this.buscarAlumno(dni);
 		Curso comision = Materia.buscarComision(codigoComision);
 		
-		if (alumnoEncontrado != null && comision != null) {
+		
 			for (int i = 0; i < alumnoEncontrado.getComisiones().size(); i++) {
 				if (alumnoEncontrado.getComisiones().get(i).equals(comision) ) {
-					alumnoEncontrado.getComisiones().get(i).getMateria().getNota().asignarValorAprimerParcial(nota.getPrimerParcial());
-					alumnoEncontrado.getComisiones().get(i).getMateria().getNota().asignarValorAsegundoParcial(nota.getSegundoParcial());
+					alumnoEncontrado.getComisiones().get(i).getMateria().setNota(nota);
 				}
 			}
-		}
+		
 
 		
 		
