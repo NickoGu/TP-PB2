@@ -14,10 +14,11 @@ public class Materia {
 	private static Integer CONTADOR_MATERIAS = 1;
 	private Dias dias;
 	private Horario horarios;
-	private ArrayList<Curso> comisiones;
+	private static ArrayList<Curso> comisiones;
 	private Aula aula;
 	private CicloLectivo cicloLectivo;
-
+	
+	
 	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
@@ -179,5 +180,19 @@ public class Materia {
 	public void setCicloLectivo(CicloLectivo cicloLectivo) {
 		this.cicloLectivo = cicloLectivo;
 	}
+	
+	
+	public static Curso buscarComision(Integer codigoComision) {
+		Curso comisionEncontrada = null;
+
+		for (int i = 0; i < comisiones.size(); i++) {
+			if (comisiones.get(i).getCodigoComision().equals(codigoComision)) {
+				comisionEncontrada = comisiones.get(i);
+			}
+		}
+		return comisionEncontrada;
+
+	}
+	
 
 }

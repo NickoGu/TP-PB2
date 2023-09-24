@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -55,7 +56,7 @@ public class TestUniversidad {
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
-		Nota nota = new Nota(5, 10);
+		Nota nota = new Nota();
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
@@ -83,7 +84,7 @@ public class TestUniversidad {
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345678;
-		Nota nota = new Nota(5, 10);
+		Nota nota = new Nota();
 
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
 		materia.setNota(nota);
@@ -103,7 +104,9 @@ public class TestUniversidad {
 
 		assertTrue(seInscribió);
 	}
-
+	
+//TODO: FALTA HACER ESTE METODO:
+	
 	@Test
 	public void queSePuedaInscribirAlumnoAlaComision() {
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
@@ -127,29 +130,98 @@ public class TestUniversidad {
 		universidad.registrarMateria(materia2);
 		universidad.agregarUnaCorrelativaAunaMateria(materia, materia2);
 	}
+	
+	
+	@Test
+	public void queSePuedaRegistrarUnaNota() {
+		
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+		String nombre = "Nico";
+		String apellido = "Guaita";
+		Integer dni = 12345;
 
-//	@Test
-//	public void obtenerMateriasAprobadasParaUnAlumno() {
-//
-//		String nombre = "Nico";
-//		String apellido = "Guaita";
-//		Integer dni = 12345678;
-//		Nota nota = new Nota(5, 10);
-//		Nota nota2 = new Nota(10, 10);
-//
-//		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
-//		materia.setNota(nota);
-//		Materia materia2 = new Materia("Inglés", 14302, Dias.LUNES, Horario.TURNO_MANANA);
-//		materia2.setNota(nota2);
-//		Alumno alumno = new Alumno(nombre, apellido, dni);
-//
-//		Universidad universidad = new Universidad();
-//		universidad.inscribirAlumnoAuiversidad(alumno);
-//		
-//		Integer materiasAprobadas =	universidad.materiasAprobadas(alumno.getDni());
-//		Integer ve = 1;
-//		assertEquals(ve, materiasAprobadas);
-//		
-//	}
+		Universidad universidad = new Universidad();
+		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		Curso comision = new Curso();
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+		universidad.registrarMateria(materia);
+		
+		
+		Nota nota = new Nota();
+		nota.asignarValorAprimerParcial(2);
+		nota.asignarValorAsegundoParcial(2);
+			
+		
+		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, fechaFinalizacionInscripcion);
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, fechaFinalizacionInscripcion);
+		Integer ve = 2;
+		Integer valorPrimeraNota = null;
+		
+		for (int i = 0; i < alumno.getComisiones().size(); i++) {
+			if(alumno.getComisiones().get(i).getMateria().getNota() != null) {
+				valorPrimeraNota = alumno.getComisiones().get(i).getMateria().getNota().getPrimerParcial();
+				break;
+			}
+		}
+		
+		assertEquals(ve, valorPrimeraNota);
+		
+		
+	}
+	
+	
+	
+	
+	
+
+	@Test
+	public void obtenerMateriasAprobadasParaUnAlumno() {
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		String nombre = "Nico";
+		String apellido = "Guaita";
+		Integer dni = 12345678;
+		Nota nota = new Nota();
+		
+		nota.asignarValorAprimerParcial(2);
+		nota.asignarValorAsegundoParcial(2);
+		
+		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_NOCHE);
+		
+		Materia materia2 = new Materia("Inglés", 14302, Dias.LUNES, Horario.TURNO_MANANA);
+		
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+		Curso comision = new Curso();
+		
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+		
+		
+		
+		Universidad universidad = new Universidad();
+		universidad.inscribirAlumnoAuiversidad(alumno);
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
+		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
+		
+		
+		
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
+
+		ArrayList<Materia> materiasAprobadas = universidad.materiasAprobadas(alumno.getDni());
+		assertEquals(1, materiasAprobadas.size());
+
+	}
 
 }

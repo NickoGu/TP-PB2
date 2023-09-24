@@ -7,6 +7,7 @@ import java.util.Iterator;
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
+	private ArrayList<Materia> materiasAprobadas;
 	private ArrayList<Profesor> profesores;
 	private ArrayList<CicloLectivo> ciclosLectivos;
 	private ArrayList<Curso> comisiones;
@@ -16,6 +17,7 @@ public class Universidad {
 		alumnosInscriptos = new ArrayList<Alumno>();
 		profesores = new ArrayList<Profesor>();
 		ciclosLectivos = new ArrayList<CicloLectivo>();
+		materiasAprobadas = new ArrayList<Materia>();
 
 	}
 
@@ -64,6 +66,8 @@ public class Universidad {
 		return alumnoEncontrado;
 
 	}
+	
+	
 
 	public Materia buscarMateria(Integer codigoMateria) {
 		Materia materiaEncontrada = null;
@@ -118,8 +122,7 @@ public class Universidad {
 		return estáLibre;
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, CicloLectivo cicloLectivo,
-			LocalDate fechaAinscribirse) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
@@ -238,15 +241,13 @@ public class Universidad {
 		return cantidadDeProfesoresAasignar;
 	}
 
-	public Integer materiasAprobadas(Integer dni) {
-		Integer materiasAprobadas = 0;
+	public ArrayList<Materia> materiasAprobadas(Integer dni) {
+		
 
 		Alumno alumno = this.buscarAlumno(dni);
 		for (int i = 0; i < alumno.getMaterias().size(); i++) {
-			alumno.getMaterias().get(i).estaPromocionada(alumno.getNotas().get(i).getPrimerParcial(),
-					alumno.getNotas().get(i).getSegundoParcial());
 			if (alumno.getMaterias().get(i).getIsPromocionada() == true) {
-				materiasAprobadas++;
+				materiasAprobadas.add(alumno.getMaterias().get(i));
 			}
 		}
 
@@ -310,6 +311,47 @@ public class Universidad {
 		}
 
 	}
+
+	public void registrarNota(Integer dni, Integer codigoComision, Nota nota) {
+		Alumno alumnoEncontrado = this.buscarAlumno(dni);
+		Curso comision = Materia.buscarComision(codigoComision);
+		
+		if (alumnoEncontrado != null && comision != null) {
+			for (int i = 0; i < alumnoEncontrado.getComisiones().size(); i++) {
+				if (alumnoEncontrado.getComisiones().get(i).equals(comision) ) {
+					alumnoEncontrado.getComisiones().get(i).getMateria().getNota().asignarValorAprimerParcial(nota.getPrimerParcial());
+					alumnoEncontrado.getComisiones().get(i).getMateria().getNota().asignarValorAsegundoParcial(nota.getSegundoParcial());
+				}
+			}
+		}
+
+		
+		
+	}
+
+	public void inscribirAlumnoAComision(Alumno alumno, Materia materiaAinscribirse, Curso comision, CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
+
+		// Verificar que el alumno y la comisión estén dados de alta
+		
+		
+		//No se puede inscribir Alumnos si este no tiene aprobadas todas las correlativas. Se aprueba con 4 o más. *
+		if( materiaAinscribirse.getAlumnos().contains(alumno)) {
+			comision.getAlumnos().add(alumno);
+			alumno.getComisiones().add(comision);
+		}
+		
+		
+		//La inscripción no se puede realizar si esta fuera de fecha Inscripción
+		
+		
+		
+		//No se puede inscribir el alumno si excede la cantidad de alumnos permitidos en el aula
+		//No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo día y Turno
+		
+		
+		
+	}
+	
 
 
 
