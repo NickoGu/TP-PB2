@@ -18,7 +18,7 @@ public class Universidad {
 		profesores = new ArrayList<Profesor>();
 		ciclosLectivos = new ArrayList<CicloLectivo>();
 		materiasAprobadas = new ArrayList<Materia>();
-
+		comisiones = new ArrayList<Curso>();
 	}
 
 	// Inscribir alumno

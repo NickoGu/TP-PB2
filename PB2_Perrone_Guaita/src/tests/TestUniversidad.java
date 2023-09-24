@@ -160,8 +160,8 @@ public class TestUniversidad {
 			
 		
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
-		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, fechaFinalizacionInscripcion);
-		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, fechaFinalizacionInscripcion);
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo,  LocalDate.of(2023, 3, 20));
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo,  LocalDate.of(2023, 3, 20));
 		Integer ve = 2;
 		Integer valorPrimeraNota = null;
 		
@@ -171,8 +171,10 @@ public class TestUniversidad {
 				break;
 			}
 		}
-		
-		assertEquals(ve, valorPrimeraNota);
+		// NO SE ESTABA INSCRIBIENDO EL ALUMNO EN LA MATERIA, POR LO TANTO NO SE INSCRIBE EN LA COMISION Y TMPOCO SE ASIGNA LA NOTA
+		//TODO: Ya lo arreglé, ahora hay que solucionar:
+		// "Cannot invoke 'java.util.ArrayList.add(object)' because the return value of 'dominio.Curso.getAlumnos()' is null"
+		 assertEquals(ve, valorPrimeraNota);
 		
 		
 	}

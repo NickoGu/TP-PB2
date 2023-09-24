@@ -18,6 +18,7 @@ public class Curso {
 	
 	public Curso() {
 		this.codigoComision = CONTADOR_MATERIAS++;
+		this.alumnos = new ArrayList<Alumno>();
 	}
 
 	public Curso(Curso comision, CicloLectivo cicloLectivo, Horario turno) {
@@ -25,10 +26,11 @@ public class Curso {
 		this.cicloLectivo = cicloLectivo;
 		this.turno = turno;
 		this.codigoComision = CONTADOR_MATERIAS++;
+		this.alumnos = new ArrayList<Alumno>();
 	}
 
 	public ArrayList<Alumno> getAlumnos() {
-		return alumnos;
+		return this.alumnos;
 	}
 
 	public void setAlumnos(ArrayList<Alumno> alumnos) {

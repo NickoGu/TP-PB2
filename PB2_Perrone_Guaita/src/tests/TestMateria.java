@@ -48,8 +48,9 @@ public class TestMateria {
 	@Test
 	public void verificarQueLaMateriaEstáAprobada() {
 
-		Nota nota = new Nota(8, 8);
-
+		Nota nota = new Nota();
+		nota.asignarValorAprimerParcial(10);
+		nota.asignarValorAsegundoParcial(10);
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
 
