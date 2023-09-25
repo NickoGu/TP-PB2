@@ -307,15 +307,15 @@ public class Universidad {
 			Curso comision = alumnoEncontrado.buscarComision(codigoComision);
 
 			if (comision != null) {
-				Materia materia = comision.getMateria(); // Obtener la materia de la comisión
+				Materia materia = comision.getMateria(); 
 
 				if (materia != null) {
-					nota.setMateria(materia); // Asignar la materia a la nota
-					materia.setNota(nota); // Asignar la nota a la materia
+					nota.setMateria(materia);
+					materia.setNota(nota); 
 					alumnoEncontrado.agregarNota(materia, nota);
 				}
 			}
-		} // Asignar la nota al alumno
+		} 
 	}
 
 	public void inscribirAlumnoAComision(Alumno alumno, Materia materiaAinscribirse, Curso comision,
