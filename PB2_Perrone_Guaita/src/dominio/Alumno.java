@@ -11,6 +11,7 @@ public class Alumno {
 	private ArrayList<Curso> comisiones;
 	ArrayList<Materia> materiasAprobadas;
 
+
 	public Alumno(String nombre, String apellido, Integer dni) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -19,6 +20,7 @@ public class Alumno {
 		comisiones = new ArrayList<Curso>();
 		notas = new ArrayList<Nota>();
 		materiasAprobadas = new ArrayList<>();
+
 	}
 	
 	public Curso buscarComision(Integer codigoComision) {
@@ -93,4 +95,18 @@ public class Alumno {
 
 	}
 
+	public ArrayList<Materia> getMateriasAprobadas() {
+		return materiasAprobadas;
+	}
+
+	public void setMateriasAprobadas(ArrayList<Materia> materiasAprobadas) {
+		this.materiasAprobadas = materiasAprobadas;
+	}
+
+
+	
+	
+
+	
+	
 }

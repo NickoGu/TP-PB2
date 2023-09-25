@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
-
+	private ArrayList<Materia> planDeEstudio;
 	private ArrayList<Profesor> profesores;
 	private ArrayList<CicloLectivo> ciclosLectivos;
 
@@ -16,6 +16,7 @@ public class Universidad {
 		alumnosInscriptos = new ArrayList<Alumno>();
 		profesores = new ArrayList<Profesor>();
 		ciclosLectivos = new ArrayList<CicloLectivo>();
+		planDeEstudio = new ArrayList<Materia>();
 
 	}
 
@@ -179,8 +180,6 @@ public class Universidad {
 		}
 	}
 
-
-
 	public void asignarProfesor(ArrayList<Profesor> profesores, Materia materia) {
 		// Para asignar profesor se debe contar la cantidad de alumnos
 		Integer contadorDeProfes = this.contarProfesores(materia);
@@ -207,16 +206,16 @@ public class Universidad {
 	}
 
 	public ArrayList<Materia> materiasAprobadas(Integer dni) {
-	    Alumno alumno = this.buscarAlumno(dni);
+		Alumno alumno = this.buscarAlumno(dni);
 
-	    for (Materia materia : alumno.getMaterias()) {
-	        if (materia.getNota() != null && materia.getNota().getPrimerParcial() >= 7
-	                && materia.getNota().getSegundoParcial() >= 7) {
-	            alumno.materiasAprobadas.add(materia);
-	        }
-	    }
+		for (Materia materia : alumno.getMaterias()) {
+			if (materia.getNota() != null && materia.getNota().getPrimerParcial() >= 7
+					&& materia.getNota().getSegundoParcial() >= 7) {
+				alumno.materiasAprobadas.add(materia);
+			}
+		}
 
-	    return  alumno.materiasAprobadas;
+		return alumno.materiasAprobadas;
 	}
 
 	public Boolean registrarCicloLectivo(CicloLectivo nuevoCiclo) {
@@ -232,7 +231,7 @@ public class Universidad {
 
 		return seRegistro;
 
-	} 
+	}
 
 	private CicloLectivo buscarPorFechasSuperpuestas(CicloLectivo nuevoCiclo) {
 		CicloLectivo cicloSuperpuestoEncontrado = null;
@@ -284,15 +283,15 @@ public class Universidad {
 			Curso comision = alumnoEncontrado.buscarComision(codigoComision);
 
 			if (comision != null) {
-				Materia materia = comision.getMateria(); 
+				Materia materia = comision.getMateria();
 
 				if (materia != null) {
 					nota.setMateria(materia);
-					materia.setNota(nota); 
+					materia.setNota(nota);
 					alumnoEncontrado.agregarNota(materia, nota);
 				}
 			}
-		} 
+		}
 	}
 
 	public void inscribirAlumnoAComision(Alumno alumno, Materia materiaAinscribirse, Curso comision,
@@ -320,25 +319,23 @@ public class Universidad {
 	public Integer obtenerNota(Integer dni, Integer idMateria) {
 		Integer notaFinal = null;
 		Materia materiaEncontrada = null;
-		
+
 		Alumno alumnoEncontrado = this.buscarAlumno(dni);
-		
-		if(alumnoEncontrado != null) {
-		  for (int i = 0; i < alumnoEncontrado.getMaterias().size(); i++) {
-			if(alumnoEncontrado.getMaterias().get(i).getIdMateria().equals(idMateria)) {
-				materiaEncontrada = alumnoEncontrado.getMaterias().get(i);
-				break;
+
+		if (alumnoEncontrado != null) {
+			for (int i = 0; i < alumnoEncontrado.getMaterias().size(); i++) {
+				if (alumnoEncontrado.getMaterias().get(i).getIdMateria().equals(idMateria)) {
+					materiaEncontrada = alumnoEncontrado.getMaterias().get(i);
+					break;
+				}
 			}
-		}		  
 		}
-		
-	Integer primeraNota = materiaEncontrada.getNota().getPrimerParcial();
-	Integer segundaNota = materiaEncontrada.getNota().getSegundoParcial();
-	
-	notaFinal = (primeraNota + segundaNota) / 2;
-		
-		
-		
+
+		Integer primeraNota = materiaEncontrada.getNota().getPrimerParcial();
+		Integer segundaNota = materiaEncontrada.getNota().getSegundoParcial();
+
+		notaFinal = (primeraNota + segundaNota) / 2;
+
 		return notaFinal;
 	}
 
@@ -346,24 +343,49 @@ public class Universidad {
 		Integer nota = 0;
 		Integer promedio = null;
 		Integer cantNotas = 0;
-		
+
 		Alumno alumnoEncontrado = this.buscarAlumno(dni);
-		
-		if(alumnoEncontrado != null) {
-			
-			for (int i = 0; i < alumnoEncontrado.getMaterias().size() ; i++) {
-				if(alumnoEncontrado.getMaterias().get(i) != null) {
+
+		if (alumnoEncontrado != null) {
+
+			for (int i = 0; i < alumnoEncontrado.getMaterias().size(); i++) {
+				if (alumnoEncontrado.getMaterias().get(i) != null) {
 					nota += this.obtenerNota(dni, alumnoEncontrado.getMaterias().get(i).getIdMateria());
 					cantNotas++;
 				}
 			}
-			
+
 		}
-		
+
 		promedio = nota / cantNotas;
-		
+
 		return promedio;
 	}
-	
 
+	public ArrayList<Materia> obtenerMateriasQueFaltanCursarParaUnAlumno(Integer dni) {
+		Alumno alumno = this.buscarAlumno(dni);
+
+		for (int i = 0; i < alumno.getMaterias().size(); i++) {
+			if(this.obtenerNota(dni, alumno.getMaterias().get(i).getIdMateria()) >= 7) {
+				planDeEstudio.remove(i);
+			}
+		}
+
+		return planDeEstudio;
+
+	}
+
+	public void registrarMateriasAlPlanDeEstudio(Materia materia) {
+		planDeEstudio.add(materia);
+		
+	}
+
+	public ArrayList<Materia> getPlanDeEstudio() {
+		return planDeEstudio;
+	}
+
+	public void setPlanDeEstudio(ArrayList<Materia> planDeEstudio) {
+		this.planDeEstudio = planDeEstudio;
+	}
+	
 }

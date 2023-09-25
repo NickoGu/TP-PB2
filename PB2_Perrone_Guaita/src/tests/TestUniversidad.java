@@ -215,7 +215,6 @@ public class TestUniversidad {
 
 	}
 
-
 	@Test
 	public void queSeObtengaLaNotaCorrecta() {
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
@@ -254,7 +253,7 @@ public class TestUniversidad {
 		assertEquals(ve, notaFinal);
 
 	}
-	
+
 	@Test
 	public void queSeObtengaElPromedioCorrecto() {
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
@@ -268,7 +267,7 @@ public class TestUniversidad {
 		Nota nota = new Nota();
 		nota.asignarValorAprimerParcial(8);
 		nota.asignarValorAsegundoParcial(8);
-		
+
 		Nota nota2 = new Nota();
 		nota2.asignarValorAprimerParcial(6);
 		nota2.asignarValorAsegundoParcial(6);
@@ -284,7 +283,7 @@ public class TestUniversidad {
 		Materia materia2 = new Materia("Ingles", 1012, Dias.LUNES, Horario.TURNO_NOCHE);
 		Curso comision = new Curso(materia);
 		Curso comision2 = new Curso(materia2);
-		
+
 		universidad.registrarMateria(materia);
 		universidad.registrarMateria(materia2);
 		universidad.inscribirAlumnoAuiversidad(alumno);
@@ -296,16 +295,76 @@ public class TestUniversidad {
 		universidad.inscribirAlumnoAComision(alumno, materia2, comision2, cicloLectivo, LocalDate.of(2023, 1, 2));
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
 		universidad.registrarNota(alumno.getDni(), comision2.getCodigoComision(), nota2);
-		
+
 		Integer ve = 7;
-		
-		
+
 		Integer promedio = universidad.calcularPromedio(alumno.getDni());
 
 		assertEquals(ve, promedio);
 
 	}
-	
-	
 
+	@Test
+	public void queDevuelvaElListadoDeMateriasQueLeFaltanAunAlumno() {
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+
+		Nota nota = new Nota();
+		nota.asignarValorAprimerParcial(8);
+		nota.asignarValorAsegundoParcial(8);
+
+		Nota nota2 = new Nota();
+		nota2.asignarValorAprimerParcial(7);
+		nota2.asignarValorAsegundoParcial(9);
+
+		String nombre = "Martina";
+		String apellido = "Perrone";
+		Integer dni = 46119380;
+
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+		Universidad universidad = new Universidad();
+
+		Materia materia = new Materia("PB2", 1010, Dias.LUNES, Horario.TURNO_NOCHE);
+		Materia materia2 = new Materia("Ingles", 1012, Dias.LUNES, Horario.TURNO_NOCHE);
+		Materia materia3 = new Materia("Ingles", 1013, Dias.LUNES, Horario.TURNO_NOCHE);
+		Materia materia4 = new Materia("Ingles", 1014, Dias.LUNES, Horario.TURNO_NOCHE);
+		Curso comision = new Curso(materia);
+		Curso comision2 = new Curso(materia2);
+
+		// Registrar las materias en el plan de estudios de la universidad
+		universidad.registrarMateriasAlPlanDeEstudio(materia);
+		universidad.registrarMateriasAlPlanDeEstudio(materia2);
+		universidad.registrarMateriasAlPlanDeEstudio(materia3);
+		universidad.registrarMateriasAlPlanDeEstudio(materia4);
+
+		// Inscribe al alumno en la universidad
+		universidad.inscribirAlumnoAuiversidad(alumno);
+
+		// Inscribe al alumno en las materias
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
+
+		// Agrega comisiones
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
+		materia2.agregarComision(cicloLectivo, comision2, Horario.TURNO_NOCHE);
+
+		// Inscribe al alumno en comisiones
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
+		universidad.inscribirAlumnoAComision(alumno, materia2, comision2, cicloLectivo, LocalDate.of(2023, 1, 2));
+
+		// Registra notas
+		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
+		universidad.registrarNota(alumno.getDni(), comision2.getCodigoComision(), nota2);
+
+		Integer ve = 2;
+		Integer vo = universidad.obtenerMateriasQueFaltanCursarParaUnAlumno(alumno.getDni()).size();
+
+		assertEquals(ve, vo);
+
+	}
 }
