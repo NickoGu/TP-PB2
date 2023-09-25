@@ -148,8 +148,7 @@ public class TestUniversidad {
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 		Nota nota = new Nota();
-		
-		
+
 		universidad.inscribirAlumnoAuiversidad(alumno);
 		universidad.registrarMateria(materia);
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
@@ -158,8 +157,7 @@ public class TestUniversidad {
 		nota.asignarValorAprimerParcial(2);
 		nota.asignarValorAsegundoParcial(2);
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
-		
-	
+
 		Integer ve = 2;
 		Curso comisionEncontrada = null;
 		for (int i = 0; i < alumno.getComisiones().size(); i++) {
@@ -206,14 +204,48 @@ public class TestUniversidad {
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
 		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
-		
 
-		
-
-		
-		
 		ArrayList<Materia> materiasAprobadas = universidad.materiasAprobadas(alumno.getDni());
 		assertEquals(1, materiasAprobadas.size());
+
+	}
+
+	@Test
+	public void queSeObtengaLaNotaCorrecta() {
+		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
+		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
+		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
+		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
+
+		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
+				fechaInicioInscripcion, fechaFinalizacionInscripcion);
+
+		Nota nota = new Nota();
+		nota.asignarValorAprimerParcial(8);
+		nota.asignarValorAsegundoParcial(8);
+
+		String nombre = "Martina";
+		String apellido = "Perrone";
+		Integer dni = 46119380;
+
+		Alumno alumno = new Alumno(nombre, apellido, dni);
+		Universidad universidad = new Universidad();
+
+		Materia materia = new Materia("PB2", 1010, Dias.LUNES, Horario.TURNO_NOCHE);
+		Curso comision = new Curso(materia);
+
+		universidad.registrarMateria(materia);
+		universidad.inscribirAlumnoAuiversidad(alumno);
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
+		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
+
+		Integer notaFinal = universidad.obtenerNota(alumno.getDni(), materia.getIdMateria());
+
+		Integer ve = 8;
+
+		assertEquals(ve, notaFinal);
 
 	}
 

@@ -340,4 +340,32 @@ public class Universidad {
 
 	}
 
+	public Integer obtenerNota(Integer dni, Integer idMateria) {
+		Integer notaFinal = null;
+		Materia materiaEncontrada = null;
+		
+		Alumno alumnoEncontrado = this.buscarAlumno(dni);
+		
+		if(alumnoEncontrado != null) {
+		  for (int i = 0; i < alumnoEncontrado.getMaterias().size(); i++) {
+			if(alumnoEncontrado.getMaterias().get(i).getIdMateria().equals(idMateria)) {
+				materiaEncontrada = alumnoEncontrado.getMaterias().get(i);
+				break;
+			}
+		}		  
+		}
+		
+	Integer primeraNota = materiaEncontrada.getNota().getPrimerParcial();
+	Integer segundaNota = materiaEncontrada.getNota().getSegundoParcial();
+	
+	notaFinal = (primeraNota + segundaNota) / 2;
+		
+		
+		
+		return notaFinal;
+	}
+	
+	
+	
+
 }
