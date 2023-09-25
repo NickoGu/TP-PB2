@@ -317,6 +317,53 @@ public class Universidad {
 
 	}
 
+	public Integer obtenerNota(Integer dni, Integer idMateria) {
+		Integer notaFinal = null;
+		Materia materiaEncontrada = null;
+		
+		Alumno alumnoEncontrado = this.buscarAlumno(dni);
+		
+		if(alumnoEncontrado != null) {
+		  for (int i = 0; i < alumnoEncontrado.getMaterias().size(); i++) {
+			if(alumnoEncontrado.getMaterias().get(i).getIdMateria().equals(idMateria)) {
+				materiaEncontrada = alumnoEncontrado.getMaterias().get(i);
+				break;
+			}
+		}		  
+		}
+		
+	Integer primeraNota = materiaEncontrada.getNota().getPrimerParcial();
+	Integer segundaNota = materiaEncontrada.getNota().getSegundoParcial();
+	
+	notaFinal = (primeraNota + segundaNota) / 2;
+		
+		
+		
+		return notaFinal;
+	}
 
+	public Integer calcularPromedio(Integer dni) {
+		Integer nota = 0;
+		Integer promedio = null;
+		Integer cantNotas = 0;
+		
+		Alumno alumnoEncontrado = this.buscarAlumno(dni);
+		
+		if(alumnoEncontrado != null) {
+			
+			for (int i = 0; i < alumnoEncontrado.getMaterias().size() ; i++) {
+				if(alumnoEncontrado.getMaterias().get(i) != null) {
+					nota += this.obtenerNota(dni, alumnoEncontrado.getMaterias().get(i).getIdMateria());
+					cantNotas++;
+				}
+			}
+			
+		}
+		
+		promedio = nota / cantNotas;
+		
+		return promedio;
+	}
+	
 
 }
