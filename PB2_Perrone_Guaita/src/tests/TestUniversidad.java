@@ -122,7 +122,7 @@ public class TestUniversidad {
 		Materia materia2 = new Materia("Programacion", 14302, Dias.SABADOS, Horario.TURNO_MANANA);
 		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
-		Curso comision = new Curso();
+		Curso comision = new Curso(materia);
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
@@ -141,27 +141,25 @@ public class TestUniversidad {
 		String nombre = "Nico";
 		String apellido = "Guaita";
 		Integer dni = 12345;
-		Curso comision = new Curso();
 		Universidad universidad = new Universidad();
 		Materia materia = new Materia("Programacion 2", 14302, Dias.LUNES, Horario.TURNO_MANANA);
-
+		Curso comision = new Curso(materia);
 		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
-
 		Alumno alumno = new Alumno(nombre, apellido, dni);
-		universidad.inscribirAlumnoAuiversidad(alumno);
-		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
-		universidad.registrarMateria(materia);
-
 		Nota nota = new Nota();
-		nota.asignarValorAprimerParcial(2);
-		nota.asignarValorAsegundoParcial(2);
-		comision.setMateria(materia);
-		//materia.setNota(nota);
-		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
 		
+		
+		universidad.inscribirAlumnoAuiversidad(alumno);
+		universidad.registrarMateria(materia);
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
 		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 3, 20));
 		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 3, 20));
+		nota.asignarValorAprimerParcial(2);
+		nota.asignarValorAsegundoParcial(2);
+		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
+		
+	
 		Integer ve = 2;
 		Curso comisionEncontrada = null;
 		for (int i = 0; i < alumno.getComisiones().size(); i++) {
@@ -174,7 +172,6 @@ public class TestUniversidad {
 		Integer notaEncontrada = comisionEncontrada.getMateria().getNota().getPrimerParcial();
 
 		assertEquals(ve, notaEncontrada);
-
 	}
 
 	@Test
@@ -197,19 +194,21 @@ public class TestUniversidad {
 		Materia materia2 = new Materia("Inglés", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 
 		Alumno alumno = new Alumno(nombre, apellido, dni);
-		Curso comision = new Curso();
+		Curso comision = new Curso(materia);
 
 		CicloLectivo cicloLectivo = new CicloLectivo(fechaInicioCicloLectivo, fechaFinalizacionCicloLectivo,
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
 
 		Universidad universidad = new Universidad();
 		universidad.inscribirAlumnoAuiversidad(alumno);
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
+		universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
 		
 
-		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
-		universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
+		
 
 		
 		

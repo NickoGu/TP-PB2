@@ -14,9 +14,15 @@ public class Curso {
 	private Horario turno;
 	private Curso comision;
 
+	
 	public Curso() {
+		
+	}
+	
+	public Curso(Materia materia) {
 		this.codigoComision = CONTADOR_MATERIAS++;
 		this.alumnos = new ArrayList<Alumno>();
+		this.materia = materia;
 	}
 
 	public Curso(Curso comision, CicloLectivo cicloLectivo, Horario turno) {

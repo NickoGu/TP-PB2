@@ -54,7 +54,7 @@ public class TestMateria {
 		Materia materia = new Materia("Programacion", 14302, Dias.LUNES, Horario.TURNO_MANANA);
 		materia.setNota(nota);
 
-		materia.estaPromocionada(materia.getNota().getPrimerParcial(), materia.getNota().getSegundoParcial());
+		materia.estaPromocionada(nota);
 
 		assertTrue(materia.getIsPromocionada());
 

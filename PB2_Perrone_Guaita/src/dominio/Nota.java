@@ -4,14 +4,11 @@ public class Nota {
 
 	private Integer primerParcial;
 	private Integer segundoParcial;
+	private Materia materia;
 
-	
-	
 	public Nota() {
-	
-	}
-	
 
+	}
 
 	public void asignarValorAprimerParcial(Integer valorNota) {
 		if (valorNota >= 1 && valorNota <= 10)
@@ -77,6 +74,14 @@ public class Nota {
 			this.segundoParcial = valorRecuperatorio;
 		}
 
+	}
+
+	public Materia getMateria() {
+		return materia;
+	}
+
+	public void setMateria(Materia materia) {
+		this.materia = materia;
 	}
 
 }

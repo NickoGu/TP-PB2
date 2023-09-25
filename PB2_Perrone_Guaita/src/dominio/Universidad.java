@@ -7,33 +7,22 @@ import java.util.Iterator;
 public class Universidad {
 	private ArrayList<Alumno> alumnosInscriptos;
 	private ArrayList<Materia> materiasRegistradas;
-	private ArrayList<Materia> materiasAprobadas;
+
 	private ArrayList<Profesor> profesores;
 	private ArrayList<CicloLectivo> ciclosLectivos;
-	private ArrayList<Curso> comisiones;
 
 	public Universidad() {
 		materiasRegistradas = new ArrayList<Materia>();
 		alumnosInscriptos = new ArrayList<Alumno>();
 		profesores = new ArrayList<Profesor>();
 		ciclosLectivos = new ArrayList<CicloLectivo>();
-		materiasAprobadas = new ArrayList<Materia>();
-		comisiones = new ArrayList<Curso>();
+
 	}
 
 	// Inscribir alumno
 	public void inscribirAlumnoAuiversidad(Alumno alumno) {
 
-		boolean alumnoExiste = false;
-
-		for (int i = 0; i < alumnosInscriptos.size(); i++) {
-			if (alumno.getDni().equals(alumnosInscriptos.get(i).getDni())) {
-				alumnoExiste = true;
-				break;
-			}
-		}
-
-		if (alumnoExiste == false) {
+		if (!alumnosInscriptos.contains(alumno)) {
 			alumnosInscriptos.add(alumno);
 		}
 	}
@@ -66,8 +55,6 @@ public class Universidad {
 		return alumnoEncontrado;
 
 	}
-	
-	
 
 	public Materia buscarMateria(Integer codigoMateria) {
 		Materia materiaEncontrada = null;
@@ -122,7 +109,8 @@ public class Universidad {
 		return estáLibre;
 	}
 
-	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
+	public Boolean inscribirAlumnoAMateria(Alumno alumno, Materia materiaAinscribirse, CicloLectivo cicloLectivo,
+			LocalDate fechaAinscribirse) {
 		Boolean sePudoInscribir = false;
 
 		if (this.buscarSiTieneLasCorrelativasAprobadas(materiaAinscribirse)
@@ -191,30 +179,30 @@ public class Universidad {
 		}
 	}
 
-	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar, Horario horarios) {
-		Boolean pudoAsignar = false;
-
-		// Para asignar el curso debo chequear que el aula tenga la capacidad
-		// suficiente,
-		// Va haber una lista de aulas, las cuales se van a generar con distintas
-		// capacidades
-		// este metodo va a buscar el aula con la capacidad necesaria y se la va asignar
-		// Al alumno le voy asignar la comision correspondiente a ese curso
-		// A la materia le voy asignar la comision correspondiente a ese curso.
-
-		for (int i = 0; i < Aula.getAulas().size(); i++) {
-			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
-				alum3.getComisiones().add(cursoAasignar);
-				Aula.getAulas().get(i).asignarTurno(horarios, pb1);
-
-				pudoAsignar = true;
-				break;
-			}
-
-		}
-
-		return pudoAsignar;
-	}
+//	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar, Horario horarios) {
+//		Boolean pudoAsignar = false;
+//
+//		// Para asignar el curso debo chequear que el aula tenga la capacidad
+//		// suficiente,
+//		// Va haber una lista de aulas, las cuales se van a generar con distintas
+//		// capacidades
+//		// este metodo va a buscar el aula con la capacidad necesaria y se la va asignar
+//		// Al alumno le voy asignar la comision correspondiente a ese curso
+//		// A la materia le voy asignar la comision correspondiente a ese curso.
+//
+//		for (int i = 0; i < Aula.getAulas().size(); i++) {
+//			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
+//				alum3.getComisiones().add(cursoAasignar);
+//				Aula.getAulas().get(i).asignarTurno(horarios, pb1);
+//
+//				pudoAsignar = true;
+//				break;
+//			}
+//
+//		}
+//
+//		return pudoAsignar;
+//	}
 
 	public void asignarProfesor(ArrayList<Profesor> profesores, Materia materia) {
 		// Para asignar profesor se debe contar la cantidad de alumnos
@@ -242,16 +230,16 @@ public class Universidad {
 	}
 
 	public ArrayList<Materia> materiasAprobadas(Integer dni) {
-		
+	    Alumno alumno = this.buscarAlumno(dni);
 
-		Alumno alumno = this.buscarAlumno(dni);
-		for (int i = 0; i < alumno.getMaterias().size(); i++) {
-			if (alumno.getMaterias().get(i).getIsPromocionada() == true) {
-				materiasAprobadas.add(alumno.getMaterias().get(i));
-			}
-		}
+	    for (Materia materia : alumno.getMaterias()) {
+	        if (materia.getNota() != null && materia.getNota().getPrimerParcial() >= 7
+	                && materia.getNota().getSegundoParcial() >= 7) {
+	            alumno.materiasAprobadas.add(materia);
+	        }
+	    }
 
-		return materiasAprobadas;
+	    return  alumno.materiasAprobadas;
 	}
 
 	public Boolean registrarCicloLectivo(CicloLectivo nuevoCiclo) {
@@ -314,44 +302,42 @@ public class Universidad {
 
 	public void registrarNota(Integer dni, Integer codigoComision, Nota nota) {
 		Alumno alumnoEncontrado = this.buscarAlumno(dni);
-		Curso comision = Materia.buscarComision(codigoComision);
-		
-		
-			for (int i = 0; i < alumnoEncontrado.getComisiones().size(); i++) {
-				if (alumnoEncontrado.getComisiones().get(i).equals(comision) ) {
-					alumnoEncontrado.getComisiones().get(i).getMateria().setNota(nota);
+
+		if (alumnoEncontrado != null) {
+			Curso comision = alumnoEncontrado.buscarComision(codigoComision);
+
+			if (comision != null) {
+				Materia materia = comision.getMateria(); // Obtener la materia de la comisión
+
+				if (materia != null) {
+					nota.setMateria(materia); // Asignar la materia a la nota
+					materia.setNota(nota); // Asignar la nota a la materia
+					alumnoEncontrado.agregarNota(materia, nota);
 				}
 			}
-		
-
-		
-		
+		} // Asignar la nota al alumno
 	}
 
-	public void inscribirAlumnoAComision(Alumno alumno, Materia materiaAinscribirse, Curso comision, CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
+	public void inscribirAlumnoAComision(Alumno alumno, Materia materiaAinscribirse, Curso comision,
+			CicloLectivo cicloLectivo, LocalDate fechaAinscribirse) {
 
 		// Verificar que el alumno y la comisión estén dados de alta
-		
-		
-		//No se puede inscribir Alumnos si este no tiene aprobadas todas las correlativas. Se aprueba con 4 o más. *
-		if( materiaAinscribirse.getAlumnos().contains(alumno)) {
+
+		// No se puede inscribir Alumnos si este no tiene aprobadas todas las
+		// correlativas. Se aprueba con 4 o más. *
+		if (materiaAinscribirse.getAlumnos().contains(alumno)
+				&& cicloLectivo.determinarSiPasoElLapso(fechaAinscribirse)) {
 			comision.getAlumnos().add(alumno);
 			alumno.getComisiones().add(comision);
 		}
-		
-		
-		//La inscripción no se puede realizar si esta fuera de fecha Inscripción
-		
-		
-		
-		//No se puede inscribir el alumno si excede la cantidad de alumnos permitidos en el aula
-		//No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo día y Turno
-		
-		
-		
+
+		// La inscripción no se puede realizar si esta fuera de fecha Inscripción
+
+		// No se puede inscribir el alumno si excede la cantidad de alumnos permitidos
+		// en el aula
+		// No se puede inscribir el Alumno si ya está inscripto a otra comisión el mismo
+		// día y Turno
+
 	}
-	
-
-
 
 }

@@ -14,11 +14,10 @@ public class Materia {
 	private static Integer CONTADOR_MATERIAS = 1;
 	private Dias dias;
 	private Horario horarios;
-	private static ArrayList<Curso> comisiones;
+	private ArrayList<Curso> comisiones;
 	private Aula aula;
 	private CicloLectivo cicloLectivo;
-	
-	
+
 	public Materia(String nombre, Integer codigoMateria, Dias dias, Horario horarios) {
 		this.nombre = nombre;
 		this.codigoMateria = codigoMateria;
@@ -33,23 +32,27 @@ public class Materia {
 		aula = new Aula();
 	}
 
-	public Boolean agregarComision( CicloLectivo cicloLectivo, Curso comision, Horario turno) {
-	    // Verificamos si ya existe una comisión con los mismos datos
-	    for (int i = 0; i < comisiones.size(); i++) {
-	        Curso comisionExistente = comisiones.get(i);
-	        if (comisionExistente.getCicloLectivo().equals(cicloLectivo) &&
-	        		comisionExistente.getTurno().equals(turno)) {
-	            return false; // Ya existe una comisión con los mismos datos, no se puede agregar otra
-	        }
-	    }
 
-	    // Si no existe una comisión con los mismos datos, creamos una nueva comisión
-	    Curso nuevaComision = new Curso(comision, cicloLectivo, turno);
-	    
-	    // Agregamos la nueva comisión a la lista de comisiones de la materia
-	    comisiones.add(nuevaComision);
-	    
-	    return true; // Comisión agregada con éxito
+	public Boolean agregarComision(CicloLectivo cicloLectivo, Curso comision, Horario turno) {
+		// Verificamos si ya existe una comisión con los mismos datos
+		for (int i = 0; i < comisiones.size(); i++) {
+			Curso comisionExistente = comisiones.get(i);
+			if (comisionExistente.getCicloLectivo().equals(cicloLectivo)
+					&& comisionExistente.getTurno().equals(turno)) {
+				return false; // Ya existe una comisión con los mismos datos, no se puede agregar otra
+			}
+		}
+
+		// Si no existe una comisión con los mismos datos, creamos una nueva comisión
+		Curso nuevaComision = new Curso(comision, cicloLectivo, turno);
+
+		// Establecemos la materia en la comisión
+		nuevaComision.setMateria(this);
+
+		// Agregamos la nueva comisión a la lista de comisiones de la materia
+		comisiones.add(nuevaComision);
+
+		return true;
 	}
 
 	public String getNombre() {
@@ -84,9 +87,9 @@ public class Materia {
 		correlativas.add(materia);
 	}
 
-	public void estaPromocionada(Integer primerParcial, Integer segundoParcial) {
+	public void estaPromocionada(Nota nota) {
 
-		if (primerParcial >= 7 && segundoParcial >= 7) {
+		if (nota.getPrimerParcial() >= 7 && nota.getSegundoParcial() >= 7) {
 			isPromocionada = true;
 		}
 
@@ -172,7 +175,6 @@ public class Materia {
 		this.idMateria = idMateria;
 	}
 
-
 	public CicloLectivo getCicloLectivo() {
 		return cicloLectivo;
 	}
@@ -180,19 +182,7 @@ public class Materia {
 	public void setCicloLectivo(CicloLectivo cicloLectivo) {
 		this.cicloLectivo = cicloLectivo;
 	}
-	
-	
-	public static Curso buscarComision(Integer codigoComision) {
-		Curso comisionEncontrada = null;
 
-		for (int i = 0; i < comisiones.size(); i++) {
-			if (comisiones.get(i).getCodigoComision().equals(codigoComision)) {
-				comisionEncontrada = comisiones.get(i);
-			}
-		}
-		return comisionEncontrada;
 
-	}
-	
 
 }
