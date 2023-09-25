@@ -125,10 +125,15 @@ public class TestUniversidad {
 		Curso comision = new Curso(materia);
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 
-		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
 		universidad.registrarMateria(materia);
 		universidad.registrarMateria(materia2);
+		universidad.inscribirAlumnoAuiversidad(alumno);
+		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 1, 3));
+		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
+		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 3));
 		universidad.agregarUnaCorrelativaAunaMateria(materia, materia2);
+
+		assertTrue(comision.getAlumnos().contains(alumno));
 	}
 
 	@Test
@@ -148,8 +153,7 @@ public class TestUniversidad {
 				fechaInicioInscripcion, fechaFinalizacionInscripcion);
 		Alumno alumno = new Alumno(nombre, apellido, dni);
 		Nota nota = new Nota();
-		
-		
+
 		universidad.inscribirAlumnoAuiversidad(alumno);
 		universidad.registrarMateria(materia);
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_MANANA);
@@ -158,8 +162,7 @@ public class TestUniversidad {
 		nota.asignarValorAprimerParcial(2);
 		nota.asignarValorAsegundoParcial(2);
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
-		
-	
+
 		Integer ve = 2;
 		Curso comisionEncontrada = null;
 		for (int i = 0; i < alumno.getComisiones().size(); i++) {
@@ -206,15 +209,12 @@ public class TestUniversidad {
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
 		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
-		
 
-		
-
-		
-		
 		ArrayList<Materia> materiasAprobadas = universidad.materiasAprobadas(alumno.getDni());
 		assertEquals(1, materiasAprobadas.size());
 
 	}
+
+
 
 }

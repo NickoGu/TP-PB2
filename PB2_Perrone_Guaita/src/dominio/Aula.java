@@ -7,7 +7,7 @@ public class Aula {
 	private Integer numAula;
 	private static Integer CONTADOR_AULAS = 1;
 	private static ArrayList<Aula> AULAS = new ArrayList<Aula>();
-	private ArrayList<Curso> cursos;
+	private ArrayList<Curso> comisiones;
 	private Horario horarios;
 	private Materia materia;
 
@@ -19,10 +19,10 @@ public class Aula {
 		this.numAula = CONTADOR_AULAS++;
 		capacidad = (int) (Math.random() * 200 + 50);
 		AULAS.add(this);
-		cursos = new ArrayList<Curso>();
+		comisiones = new ArrayList<Curso>();
 	}
 
-	public Boolean asignarTurno(Horario horarios, Materia materia) {
+	public Boolean asignarTurno(Horario horarios, Materia materia, Integer codigoComision) {
 		Boolean sePudoAsignar = false;
 
 		if (this.horarios == null && this.materia == null) {
@@ -65,5 +65,38 @@ public class Aula {
 	public static void setAulas(ArrayList<Aula> aulas) {
 		AULAS = aulas;
 	}
+
+	public static ArrayList<Aula> getAULAS() {
+		return AULAS;
+	}
+
+	public static void setAULAS(ArrayList<Aula> aULAS) {
+		AULAS = aULAS;
+	}
+
+	public ArrayList<Curso> getComisiones() {
+		return comisiones;
+	}
+
+	public void setComisiones(ArrayList<Curso> comisiones) {
+		this.comisiones = comisiones;
+	}
+
+	public Horario getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Horario horarios) {
+		this.horarios = horarios;
+	}
+
+	public Materia getMateria() {
+		return materia;
+	}
+
+	public void setMateria(Materia materia) {
+		this.materia = materia;
+	}
+	
 
 }

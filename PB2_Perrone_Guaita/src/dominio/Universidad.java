@@ -179,30 +179,7 @@ public class Universidad {
 		}
 	}
 
-//	public boolean asignarCursoAmateriaYalumno(Materia pb1, Alumno alum3, Curso cursoAasignar, Horario horarios) {
-//		Boolean pudoAsignar = false;
-//
-//		// Para asignar el curso debo chequear que el aula tenga la capacidad
-//		// suficiente,
-//		// Va haber una lista de aulas, las cuales se van a generar con distintas
-//		// capacidades
-//		// este metodo va a buscar el aula con la capacidad necesaria y se la va asignar
-//		// Al alumno le voy asignar la comision correspondiente a ese curso
-//		// A la materia le voy asignar la comision correspondiente a ese curso.
-//
-//		for (int i = 0; i < Aula.getAulas().size(); i++) {
-//			if (Aula.getAulas().get(i) != null && Aula.getAulas().get(i).getCapacidad() >= pb1.getAlumnos().size()) {
-//				alum3.getComisiones().add(cursoAasignar);
-//				Aula.getAulas().get(i).asignarTurno(horarios, pb1);
-//
-//				pudoAsignar = true;
-//				break;
-//			}
-//
-//		}
-//
-//		return pudoAsignar;
-//	}
+
 
 	public void asignarProfesor(ArrayList<Profesor> profesores, Materia materia) {
 		// Para asignar profesor se debe contar la cantidad de alumnos
@@ -255,7 +232,7 @@ public class Universidad {
 
 		return seRegistro;
 
-	}
+	} 
 
 	private CicloLectivo buscarPorFechasSuperpuestas(CicloLectivo nuevoCiclo) {
 		CicloLectivo cicloSuperpuestoEncontrado = null;
@@ -339,5 +316,7 @@ public class Universidad {
 		// día y Turno
 
 	}
+
+
 
 }
