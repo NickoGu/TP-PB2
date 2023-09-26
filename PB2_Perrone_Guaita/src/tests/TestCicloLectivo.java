@@ -40,7 +40,7 @@ public class TestCicloLectivo {
 		assertTrue(universidad.registrarCicloLectivo(cicloLectivo));
 
 	}
-	
+
 	@Test
 	public void queNoSePuedaRegistrarUnCicloLectivoSuperpuesto() {
 
@@ -48,7 +48,7 @@ public class TestCicloLectivo {
 		LocalDate fechaFinalizacionCicloLectivo = LocalDate.of(2023, 12, 31);
 		LocalDate fechaInicioInscripcion = LocalDate.of(2023, 1, 1);
 		LocalDate fechaFinalizacionInscripcion = LocalDate.of(2023, 3, 28);
-		
+
 		LocalDate fechaInicioCicloLectivo2 = LocalDate.of(2023, 8, 1);
 		LocalDate fechaFinalizacionCicloLectivo2 = LocalDate.of(2023, 11, 20);
 		LocalDate fechaInicioInscripcion2 = LocalDate.of(2023, 1, 1);

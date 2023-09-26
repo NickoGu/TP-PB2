@@ -7,19 +7,6 @@ import org.junit.Test;
 
 public class TestNota {
 
-	// Que si la nota del primer parcial o del segundo parcial es menor a 7 vaya a
-	// recuperatorio
-	// que si ambos parciales son mayores a 7 promocione
-	// Se carga primer parcial, luego segundo y si debe ir a recueratorio a cual
-	// debe recuperar
-	// determinar que parcial esta desaprobado
-	// metodo en el que se reemplace la nota del recuperatorio por la del parcial
-	// asignado
-	// Metodo que determine si debe recuperar primer parcial
-	// Metodo que determine si debe recuperar segundo parcial
-	// Puede recuperar algun parcial? si. entonces puede recuperar el primero? no
-	// puede recuperar el segundo? si
-
 	@Test
 	public void queSePuedaAsignarUnValorAlPrimerParcial() {
 		Nota nota = new Nota();
@@ -90,8 +77,6 @@ public class TestNota {
 		nota.recuperarParcial(notaRecuperatorio);
 		Integer veParcialRecuperado = 8;
 		Integer voParcialRecuperado = nota.getPrimerParcial();
-
-
 
 		assertEquals(veParcialRecuperado, voParcialRecuperado);
 

@@ -17,8 +17,6 @@ import dominio.Universidad;
 
 public class TestMateria {
 
-	// Chequea las notas y verifica que este promocionada
-
 	@Test
 	public void queSePuedaCrearLaMateria() {
 

@@ -105,8 +105,6 @@ public class TestUniversidad {
 		assertTrue(seInscribió);
 	}
 
-//TODO: FALTA HACER ESTE METODO:
-
 	@Test
 	public void queSePuedaInscribirAlumnoAlaComision() {
 		LocalDate fechaInicioCicloLectivo = LocalDate.of(2023, 4, 1);
@@ -336,28 +334,22 @@ public class TestUniversidad {
 		Curso comision = new Curso(materia);
 		Curso comision2 = new Curso(materia2);
 
-		// Registrar las materias en el plan de estudios de la universidad
 		universidad.registrarMateriasAlPlanDeEstudio(materia);
 		universidad.registrarMateriasAlPlanDeEstudio(materia2);
 		universidad.registrarMateriasAlPlanDeEstudio(materia3);
 		universidad.registrarMateriasAlPlanDeEstudio(materia4);
 
-		// Inscribe al alumno en la universidad
 		universidad.inscribirAlumnoAuiversidad(alumno);
 
-		// Inscribe al alumno en las materias
 		universidad.inscribirAlumnoAMateria(alumno, materia, cicloLectivo, LocalDate.of(2023, 2, 25));
 		universidad.inscribirAlumnoAMateria(alumno, materia2, cicloLectivo, LocalDate.of(2023, 2, 25));
 
-		// Agrega comisiones
 		materia.agregarComision(cicloLectivo, comision, Horario.TURNO_NOCHE);
 		materia2.agregarComision(cicloLectivo, comision2, Horario.TURNO_NOCHE);
 
-		// Inscribe al alumno en comisiones
 		universidad.inscribirAlumnoAComision(alumno, materia, comision, cicloLectivo, LocalDate.of(2023, 1, 2));
 		universidad.inscribirAlumnoAComision(alumno, materia2, comision2, cicloLectivo, LocalDate.of(2023, 1, 2));
 
-		// Registra notas
 		universidad.registrarNota(alumno.getDni(), comision.getCodigoComision(), nota);
 		universidad.registrarNota(alumno.getDni(), comision2.getCodigoComision(), nota2);
 
