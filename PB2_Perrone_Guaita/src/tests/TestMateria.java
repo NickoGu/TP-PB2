@@ -134,24 +134,4 @@ public class TestMateria {
 
 	}
 
-//	@Test
-//	public void verificarSiAdeudaCorrelativa() {
-//
-//		Universidad universidad = new Universidad();
-//		Nota nota = new Nota(8, 9);
-//		Materia materia = new Materia("Programacion", 123345);
-//		Materia materia2 = new Materia("Taller Web", 1253);
-//		Alumno alumno = new Alumno("Martu", "Pe", 2134);
-//
-//		universidad.registrarMateria(materia);
-//		universidad.agregarUnaCoorrelativaAunaMateria(materia, materia2);
-//		materia.setNota(nota);
-//
-//		Boolean primeraMateriaPromocionada = materia.inscribirAlumno(alumno, materia.getNota().getPrimerParcial(),
-//				materia.getNota().getSegundoParcial());
-//
-//		assertTrue(primeraMateriaPromocionada);
-//
-//	}
-
 }

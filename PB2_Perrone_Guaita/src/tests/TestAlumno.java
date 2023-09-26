@@ -10,7 +10,7 @@ public class TestAlumno {
 
 	@Test
 	public void queSePuedaCrearElAlumno() {
-		String nombre = "Nico";
+		String nombre = "Martu";
 		String apellido = "Guaita";
 		Integer dni = 12345;
 
